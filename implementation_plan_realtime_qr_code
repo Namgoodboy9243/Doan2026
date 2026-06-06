@@ -1,0 +1,103 @@
+# Kế hoạch Triển khai Hệ thống Thanh toán QR Code Tự động và Realtime (VietQR)
+
+Bản kế hoạch này mô tả chi tiết phương án thiết kế và triển khai tính năng **Thanh toán bằng QR Code tự động đồng bộ thời gian thực (Realtime)**. Khách hàng chỉ cần quét mã VietQR và thanh toán trên App Ngân hàng, màn hình website sẽ tự động chuyển đổi sang trạng thái "Thanh toán thành công" và hệ thống Admin tự động nhận diện cập nhật trạng thái đơn hàng mà không cần khách hàng bấm thêm bất kỳ nút xác nhận thủ công nào.
+
+---
+
+## Các vấn đề của hệ thống hiện tại & Phương án tối ưu
+
+### 1. Quy trình thanh toán QR hiện tại (Thủ công)
+- **Vấn đề**: Hiện nay khi khách bấm "Thanh toán QR", hệ thống hiển thị QR Code dựa trên thông tin tĩnh (số điện thoại) **trước khi tạo đơn hàng trong Database**. Khách chuyển khoản xong phải tự bấm nút *"Tôi đã chuyển khoản thành công"* thì đơn hàng mới được gửi đi.
+- **Rủi ro**: Nếu khách chuyển khoản thành công nhưng lỡ tay tắt trình duyệt hoặc không bấm nút xác nhận, đơn hàng sẽ **không bao giờ được tạo** trong cơ sở dữ liệu, dẫn đến thất thoát tiền và khiếu nại.
+- **Giải pháp tối ưu**:
+  1. Khi khách nhấn "Thanh toán QR", hệ thống sẽ **gửi AJAX tạo đơn hàng ngay lập tức** dưới dạng trạng thái **Chờ thanh toán (5)**.
+  2. Lấy `order_id` vừa tạo để tạo nội dung chuyển khoản **duy nhất và định danh**: `TTGSHOP DH{order_id}` (Ví dụ: `TTGSHOP DH105`).
+  3. Hiển thị mã QR chứa nội dung chuyển khoản định danh này cùng số tiền chính xác của đơn hàng.
+  4. Trình duyệt tự động kích hoạt tiến trình **Long-polling** gửi yêu cầu kiểm tra trạng thái đơn hàng định kỳ mỗi 3 giây.
+  5. Khi ngân hàng hoặc công cụ giả lập gửi tín hiệu thanh toán, Backend cập nhật trạng thái thành **Đang chuẩn bị (2)** (đã nhận tiền). Trình duyệt phát hiện đổi trạng thái sẽ lập tức hiển thị hiệu ứng thành công và tự động chuyển hướng.
+
+### 2. Phương án Realtime (Long-polling vs WebSockets)
+- **Đánh giá**:
+  - **WebSockets** (Pusher/Firebase/Socket.io) cung cấp độ trễ cực thấp nhưng yêu cầu cài đặt server phụ trợ phức tạp và tốn phí vận hành.
+  - **Long-polling** (tần suất 3 giây/lần) cực kỳ nhẹ nhàng, ổn định, hoạt động tốt trên mọi môi trường máy chủ PHP mà không phát sinh thêm bất kỳ chi phí nào và đảm bảo độ phản hồi dưới 3 giây - hoàn toàn mượt mà đối với trải nghiệm thanh toán.
+- **Lựa chọn đề xuất**: Triển khai **Long-polling kết hợp hiệu ứng giao diện (UI) chuyển động mượt mà** để tối ưu hóa hiệu năng và tính ổn định.
+
+---
+
+## Chi tiết các thay đổi đề xuất
+
+### 1. Component: Backend & Routing (PHP/Laravel)
+
+#### [MODIFY] [routes/web.php](file:///c:/xampp/htdocs/example-app/routes/web.php)
+Thêm các route phục vụ kiểm tra trạng thái thời gian thực và giả lập thanh toán:
+```php
+    // Route kiểm tra trạng thái thanh toán thời gian thực cho Client
+    Route::get('checkout/check-status/{id}', [Homecontroller::class, 'checkOrderStatus'])->name('checkout.check_status');
+    
+    // Route giả lập nhận tiền từ Ngân hàng (dành cho kiểm thử)
+    Route::get('checkout/simulate-payment/{id}', [Homecontroller::class, 'simulatePayment'])->name('checkout.simulate_payment');
+```
+
+#### [MODIFY] [Homecontroller.php](file:///c:/xampp/htdocs/example-app/app/Http/Controllers/Homecontroller.php)
+Thêm 2 hàm xử lý logic kiểm tra trạng thái đơn hàng và giả lập webhook ngân hàng:
+- `checkOrderStatus($id)`: Trả về trạng thái đơn hàng dưới dạng JSON. Nếu `status != 5` (đã thanh toán hoặc đang chuẩn bị), trả về `{ paid: true }`.
+- `simulatePayment($id)`: Giả lập việc nhận tiền bằng cách đổi trạng thái đơn hàng từ `5` sang `2` (Đang chuẩn bị), nhằm hỗ trợ kiểm thử tính năng chuyển đổi màn hình tự động mà không cần quét mã thật.
+
+---
+
+### 2. Component: Frontend Checkout (Blade/Javascript)
+
+#### [MODIFY] [cart.blade.php](file:///c:/xampp/htdocs/example-app/resources/views/cart.blade.php)
+1. **Thiết kế lại hàm `openQRModal()`**:
+   - Khi bấm nút "Thanh toán QR", đầu tiên thực hiện validate thông tin.
+   - Gửi yêu cầu AJAX tạo đơn hàng trước bằng API `/checkout/create-ajax`.
+   - Nhận `order_id` trả về, gán mã QR động với nội dung duy nhất: `TTGSHOP DH{order_id}`.
+   - Bắt đầu tiến trình kiểm tra trạng thái tự động (`checkPaymentPolling`) sau mỗi 3 giây.
+2. **Nâng cấp giao diện Modal QR**:
+   - Thêm phần thông tin hiển thị rõ ràng nội dung chuyển khoản định danh và hướng dẫn chuyển khoản.
+   - Thiết kế màn hình **Thành công** trực quan ngay trong Modal với hiệu ứng checkmark tròn chuyển động, âm thanh hiệu ứng (Success chime) và tự động đếm ngược 3 giây để chuyển hướng về trang lịch sử đơn hàng.
+3. **Bổ sung liên kết giả lập thanh toán nhanh**:
+   - Hiển thị một nút nhỏ kín đáo hoặc một khu vực dành riêng cho việc test: *"Bấm vào đây để giả lập quét mã thành công"* liên kết trực tiếp với `/checkout/simulate-payment/{id}` giúp việc kiểm thử chức năng tự động chuyển đổi trở nên cực kỳ dễ dàng.
+
+---
+
+## Quy trình trải nghiệm Người dùng (User Flow) sau khi nâng cấp
+
+```mermaid
+sequenceDiagram
+    actor Khách hàng
+    participant Trình duyệt (Client)
+    participant Máy chủ (Laravel)
+    participant Ngân hàng (Webhook)
+
+    Khách hàng->>Trình duyệt: Bấm "THANH TOÁN QR"
+    Trình duyệt->>Máy chủ: AJAX checkoutAjax()
+    Máy chủ->>Máy chủ: Tạo Đơn hàng #105 (Status = 5)
+    Máy chủ-->>Trình duyệt: Trả về order_id = 105
+    Trình duyệt->>Trình duyệt: Tạo mã VietQR (TTGSHOP DH105)
+    Trình duyệt->>Khách hàng: Hiển thị Modal QR & Bắt đầu Polling
+    loop Mỗi 3 giây
+        Trình duyệt->>Máy chủ: GET check-status/105
+        Máy chủ-->>Trình duyệt: { paid: false }
+    end
+    Khách hàng->>Ngân hàng: Quét mã QR & Chuyển tiền thành công
+    Ngân hàng->>Máy chủ: Webhook báo nhận tiền (DH105)
+    Máy chủ->>Máy chủ: Cập nhật Đơn hàng #105 thành Status = 2 (Đã thanh toán)
+    Trình duyệt->>Máy chủ: GET check-status/105
+    Máy chủ-->>Trình duyệt: { paid: true }
+    Trình duyệt->>Trình duyệt: Hiển thị Hiệu ứng Thành Công 🌟
+    Trình duyệt->>Khách hàng: Tự động Redirect sang Lịch sử đơn hàng sau 3s!
+```
+
+---
+
+## Kế hoạch kiểm thử & Xác minh
+
+1. **Kiểm thử Luồng Tự Động bằng Simulator (Không cần thẻ thật):**
+   - Điền thông tin giao hàng tại trang Giỏ hàng và bấm **Thanh toán QR**.
+   - Modal QR hiện ra, trạng thái thông báo *"Đang chờ thanh toán..."*.
+   - Mở một tab trình duyệt mới hoặc bấm vào nút **[Giả lập thanh toán thành công]** tích hợp sẵn trên giao diện test.
+   - Xác nhận:
+     - Màn hình QR trên tab cũ ngay lập tức (trong vòng dưới 3 giây) chuyển sang màu xanh lá cây với vòng tròn checkmark hoạt họa đẹp mắt.
+     - Hệ thống tự động chuyển hướng khách hàng về trang Lịch sử đơn hàng sau 3 giây.
+     - Vào trang Admin xác nhận trạng thái đơn hàng đó tự động chuyển sang **"Đang chuẩn bị"** (status = 2) tương ứng với đã thanh toán.

@@ -2,7 +2,7 @@
 <footer class="bg-white">
     <div class="bg-darkBg py-10">
         <div class="container mx-auto px-4">
-            <h3 class="text-white text-center text-xl font-bold mb-8 uppercase tracking-wider">HỆ THỐNG SHOWROOM TTG</h3>
+            <h3 class="text-white text-center text-xl font-bold mb-8 uppercase tracking-wider">HỆ THỐNG SHOWROOM SPATACUS LAPTOP</h3>
             <div class="grid grid-cols-2 gap-10 max-w-5xl mx-auto">
                 <div class="border border-gray-700 rounded-lg p-6 relative bg-gray-900 bg-opacity-50">
                     <div class="absolute -top-3.5 left-1/2 transform -translate-x-1/2 bg-gradient-to-r from-orange-500 to-yellow-500 text-black px-10 py-1.5 rounded-full font-bold text-sm shadow-md uppercase tracking-wide">SHOWROOM HÀ NỘI</div>
@@ -28,9 +28,9 @@
 
     <div class="container mx-auto px-4 py-12 grid grid-cols-4 gap-8 border-b border-gray-200">
         <div>
-            <h1 class="text-2xl font-black italic text-gray-800 mb-6"><span class="text-blue-500">T</span><span class="text-green-500">T</span><span class="text-primary">G</span><span class="text-black">SHOP</span></h1>
-            <h4 class="font-bold mb-3 text-gray-900">Về TTG</h4>
-            <p class="text-sm text-gray-600 leading-relaxed">Trang thương mại chính thức của Dũng CT - Trực Tiếp Game. Luôn tìm kiếm những sản phẩm vì game thủ.</p>
+            <h1 class="text-2xl font-black italic text-gray-800 mb-6"><span class="text-blue-500">S</span><span class="text-green-500">P</span><span class="text-primary">A</span><span class="text-black">TACUS</span></h1>
+            <h4 class="font-bold mb-3 text-gray-900">Về SPATACUS</h4>
+            <p class="text-sm text-gray-600 leading-relaxed">Hệ thống phân phối Laptop hàng đầu Việt Nam. Luôn cung cấp các dòng Laptop chính hãng chất lượng cao.</p>
         </div>
         <div>
             <h4 class="font-bold mb-5 text-gray-900">Thông tin liên hệ</h4>

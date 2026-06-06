@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
-@section('title', 'PC GAMING - TTGSHOP')
+@section('title', 'LAPTOP CHÍNH HÃNG - SPATACUS')
 
 @section('content')
 
     <!-- Breadcrumb -->
     <div class="text-sm text-gray-500 mb-4 px-2">
-        Trang chủ &gt; <span class="font-bold text-gray-800 uppercase">PC Gaming</span>
+        Trang chủ &gt; <span class="font-bold text-gray-800 uppercase">Laptop Chính Hãng</span>
     </div>
 
     <!-- Notice Banner -->
     <div class="bg-white p-6 rounded-lg mb-6 border border-gray-100 shadow-sm text-sm text-gray-700 leading-relaxed">
-        <div class="font-bold mb-4 text-base"><span class="text-yellow-400">🌟</span> TTGShop | THÔNG BÁO CHÍNH THỨC KINH DOANH PC !</div>
-        <p class="mb-4">Chào toàn thể các anh em, sau một thời gian dài ấp ủ và lên kế hoạch thì cuối cùng TTG Team cũng có cơ hội thông báo tới tất cả các anh em rằng kể từ ngày 26/12/2022 TTG sẽ chính thức kinh doanh các sản phẩm về công nghệ điện tử, cụ thể là PC Gaming - PC Workstation - Hi-end Gaming gear 🥇 Vậy nên..</p>
-        <p class="mb-4"><span class="text-yellow-400">👉</span> Muốn Tìm PC Tối Ưu Về Giá - Đảm Bảo Hiệu Năng - Tiết Kiệm Thời Gian Làm Việc thì nhắn ngay 💌 TTG cân cả GIÁ & CHẤT cho anh em 💪</p>
-        <p class="mb-4"><span class="text-yellow-400">👉</span> Sự ủng hộ của anh em dành cho team TTG đã đang và sẽ luôn là nguồn động lực lớn giúp team hiện thực hóa các dự định của mình. Rất mong anh em sẽ ủng hộ team TTG thật nhiều trong vai trò mới này 🤝</p>
-        <p class="mb-2 text-gray-400"><span class="text-yellow-400 opacity-50">👉</span> Và cũng như thay lời tri ân tới tất cả anh em, thì chúng mình sẽ dành 10 suất áo Bomber sớm nhất cho 10 anh em BUILD máy tại TTG Shop.</p>
+        <div class="font-bold mb-4 text-base"><span class="text-yellow-400">🌟</span> SPATACUS | THÔNG BÁO CHÍNH THỨC PHÂN PHỐI HỆ THỐNG LAPTOP CHÍNH HÃNG!</div>
+        <p class="mb-4">Chào toàn thể các anh em yêu công nghệ, sau một thời gian dài ấp ủ và lên kế hoạch thì cuối cùng Spatacus Team cũng có cơ hội ra mắt siêu thị chuyên biệt **Spatacus Laptop** – Nơi phân phối các sản phẩm công nghệ đỉnh cao, tập trung hoàn toàn vào các dòng Laptop Gaming, Laptop Văn Phòng, Ultrabook Mỏng Nhẹ & MacBook Series chính hãng 🥇</p>
+        <p class="mb-4"><span class="text-yellow-400">👉</span> Bạn muốn tìm dòng Laptop mỏng nhẹ, tối ưu về giá hay một cỗ máy Gaming chiến game đỉnh cao? Nhắn tin ngay 💌 Spatacus Laptop sẵn sàng tư vấn cấu hình phù hợp và hỗ trợ trả góp 0% nhanh gọn 💪</p>
+        <p class="mb-4"><span class="text-yellow-400">👉</span> Mọi sản phẩm bán ra đều được tặng kèm bộ quà tặng cực chất: Balo chống sốc cao cấp + Chuột không dây chính hãng + Lót chuột size lớn 🤝</p>
+        <p class="mb-2 text-gray-400"><span class="text-yellow-400 opacity-50">👉</span> Và đặc biệt, để tri ân khách hàng, chúng mình sẽ dành tặng 10 chiếc áo khoác Bomber giới hạn độc quyền cho 10 khách hàng đầu tiên đặt mua Laptop tại SPATACUS.</p>
         <div class="text-center mt-2 cursor-pointer text-primary hover:underline font-medium">
             Xem thêm <i class="fas fa-chevron-down text-xs ml-1"></i>
         </div>
@@ -32,12 +32,12 @@
             <div class="bg-white border border-gray-200 rounded-lg shadow-sm">
                 <!-- Categories -->
                 <div class="p-4 border-b border-gray-200">
-                    <h3 class="font-bold text-gray-800 mb-3 uppercase text-sm">PC Gaming</h3>
+                    <h3 class="font-bold text-gray-800 mb-3 uppercase text-sm">Dòng Laptop</h3>
                     <ul class="space-y-3 text-sm text-gray-700">
-                        <li><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> PC GAMING GIÁ RẺ</a></li>
-                        <li class="border-t border-dashed border-gray-200 pt-2"><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> PC STREAM GAME</a></li>
-                        <li class="border-t border-dashed border-gray-200 pt-2"><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> PC Core Ultra</a></li>
-                        <li class="border-t border-dashed border-gray-200 pt-2"><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> PC GAMING CAO CẤP</a></li>
+                        <li><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> LAPTOP GAMING</a></li>
+                        <li class="border-t border-dashed border-gray-200 pt-2"><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> ULTRABOOK MỎNG NHẸ</a></li>
+                        <li class="border-t border-dashed border-gray-200 pt-2"><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> LAPTOP ĐỒ HỌA & WORKSTATION</a></li>
+                        <li class="border-t border-dashed border-gray-200 pt-2"><a href="#" class="flex items-center hover:text-primary transition"><i class="fas fa-angle-double-right text-gray-400 mr-2 text-xs"></i> MACBOOK & SURFACE</a></li>
                     </ul>
                 </div>
 
@@ -96,19 +96,16 @@
 
                 <!-- VGA -->
                 <div class="p-4 border-b border-gray-200">
-                    <h3 class="font-bold text-gray-800 mb-3 uppercase text-sm">VGA</h3>
+                    <h3 class="font-bold text-gray-800 mb-3 uppercase text-sm">Card Đồ Họa (GPU)</h3>
                     <div class="space-y-2 text-sm text-gray-700 max-h-56 overflow-y-auto pr-2" style="scrollbar-width: thin;">
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5060 8GB (24)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5060 Ti 8GB (17)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5060 Ti 16GB (32)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5070 12GB (38)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5070 Ti 16GB (22)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5080 16GB (19)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 5090 32GB (14)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">AMD RX 7600 8GB (12)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">AMD RX 9060 XT 8GB (6)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">AMD RX 9060 XT 16GB (14)</span></label>
-                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">AMD RX 9070 XT 16GB (20)</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 4050 Laptop GPU</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 4060 Laptop GPU</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 4070 Laptop GPU</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 4080 Laptop GPU</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">NVIDIA RTX 4090 Laptop GPU</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">Intel Iris Xe / Arc Graphics</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">AMD Radeon Graphics</span></label>
+                        <label class="flex items-center cursor-pointer hover:text-primary group"><input type="checkbox" class="mr-3 rounded border-gray-300 text-primary focus:ring-primary w-4 h-4"> <span class="group-hover:translate-x-1 transition-transform">Apple Silicon M-Series GPU</span></label>
                     </div>
                 </div>
 
@@ -141,140 +138,14 @@
                 
                 <!-- Product 1 -->
                 <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-2%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC AMD GAMING PRO RYZEN 7 9850X3D - RTX...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">54.680.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">55.990.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-10%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC AMD GAMING LUXURY RYZEN 9 9950X3D2 -RTX...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">179.980.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">199.900.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 3 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-12%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG ULTRA GAMING I7 14700F - 16GB DDR4 - RTX...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">26.280.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">29.990.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 4 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-9%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1624701928517-44c8ac49d93c?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG ULTRA GAMING I5 14600KF - 16GB DDR4 - RT...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">23.680.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">25.990.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 5 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-19%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC GAMING ASUS ROG HATSUNE MIKU EDITION...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">146.680.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">179.990.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 6 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-5%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG GAMING CORE ULTRA 7 270K PLUS - 32G...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">52.980.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">55.990.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 7 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
                     <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-3%</span>
                     <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=300&h=300" alt="ASUS ROG Strix" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG GAMING CORE ULTRA 7 270K PLUS - RTX...</h3>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop ASUS ROG Strix Scar 16 (Core i9-14900HX - RTX 4080 - OLED)</h3>
                     <div class="mt-auto">
                         <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">68.680.000₫</div>
+                            <div class="text-primary font-bold text-lg">68.990.000₫</div>
                         </div>
                         <div class="text-gray-400 text-xs line-through mb-3">70.990.000₫</div>
                         <div class="flex items-center justify-between">
@@ -286,18 +157,18 @@
                     </div>
                 </div>
 
-                <!-- Product 8 -->
+                <!-- Product 2 -->
                 <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
                     <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-4%</span>
                     <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1624701928517-44c8ac49d93c?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=300&h=300" alt="Legion 5 Pro" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG GAMING CORE ULTRA 7 270K PLUS - RTX...</h3>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop Lenovo Legion 5 Pro (AMD Ryzen 7 7745HX - RTX 4060 - 240Hz)</h3>
                     <div class="mt-auto">
                         <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">54.680.000₫</div>
+                            <div class="text-primary font-bold text-lg">38.490.000₫</div>
                         </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">56.990.000₫</div>
+                        <div class="text-gray-400 text-xs line-through mb-3">39.990.000₫</div>
                         <div class="flex items-center justify-between">
                             <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
                                 <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
@@ -307,34 +178,55 @@
                     </div>
                 </div>
 
-                <!-- Product 9 -->
-                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-4%</span>
-                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
-                    </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG GAMING CORE ULTRA 7 270K PLUS - RTX...</h3>
-                    <div class="mt-auto">
-                        <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">46.980.000₫</div>
-                        </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">48.990.000₫</div>
-                        <div class="flex items-center justify-between">
-                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
-                            </button>
-                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Product 10 -->
+                <!-- Product 3 -->
                 <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
                     <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-5%</span>
                     <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?auto=format&fit=crop&w=300&h=300" alt="Dell XPS 15" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG GAMING ULTRA 7 270K PLUS - RTX 5060 Ti...</h3>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop Dell XPS 15 9530 (Intel Core i7-13700H - RTX 4050 - OLED Touch)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">52.990.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">55.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-11%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=300&h=300" alt="MacBook Pro" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">MacBook Pro 14" M3 Max (14-Core CPU - 30-Core GPU - 36GB - 1TB)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">79.990.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">89.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-5%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=300&h=300" alt="HP Envy" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop HP Envy 16 (Intel Core i9-13900H - RTX 4060 - 2K Touch)</h3>
                     <div class="mt-auto">
                         <div class="flex items-end justify-between mb-1">
                             <div class="text-primary font-bold text-lg">42.680.000₫</div>
@@ -349,18 +241,123 @@
                     </div>
                 </div>
 
-                <!-- Product 11 -->
+                <!-- Product 6 -->
                 <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-8%</span>
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-4%</span>
                     <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1587831990711-23ca6441447b?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1618424181497-157f25b6ddd5?auto=format&fit=crop&w=300&h=300" alt="ThinkPad X1" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC ULTRA GAMING i5 14400F - 16GB DDR4 - RTX...</h3>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop Lenovo ThinkPad X1 Carbon Gen 11 (Core i7-1355U - 32GB - 1TB)</h3>
                     <div class="mt-auto">
                         <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">28.480.000₫</div>
+                            <div class="text-primary font-bold text-lg">46.980.000₫</div>
                         </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">30.990.000₫</div>
+                        <div class="text-gray-400 text-xs line-through mb-3">48.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 7 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-4%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=300&h=300" alt="Predator Helios 16" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop Acer Predator Helios 16 (Intel Core i9-13900HX - RTX 4070 - 240Hz)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">54.680.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">56.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 8 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-12%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=300&h=300" alt="Zenbook 14 OLED" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop ASUS Zenbook 14 OLED (Intel Core Ultra 7 155H - 16GB - OLED)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">26.280.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">29.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 9 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-4%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=300&h=300" alt="Aorus 16X" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop Gigabyte Aorus 16X (Intel Core i7-14650HX - RTX 4070 - 165Hz)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">45.980.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">47.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 10 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-9%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=300&h=300" alt="MSI Katana" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop MSI Katana 15 (Intel Core i7-13620H - RTX 4060 - 144Hz)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">23.680.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">25.990.000₫</div>
+                        <div class="flex items-center justify-between">
+                            <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
+                            </button>
+                            <span class="text-green-600 bg-green-50 border border-green-100 px-2 py-1 rounded text-xs font-medium">Còn hàng</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 11 -->
+                <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-10%</span>
+                    <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
+                        <img src="https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?auto=format&fit=crop&w=300&h=300" alt="HP Victus 16" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                    </div>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">Laptop HP Victus 16 (AMD Ryzen 5 7640HS - RTX 4050 - FHD 144Hz)</h3>
+                    <div class="mt-auto">
+                        <div class="flex items-end justify-between mb-1">
+                            <div class="text-primary font-bold text-lg">20.680.000₫</div>
+                        </div>
+                        <div class="text-gray-400 text-xs line-through mb-3">22.990.000₫</div>
                         <div class="flex items-center justify-between">
                             <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
                                 <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
@@ -372,16 +369,16 @@
 
                 <!-- Product 12 -->
                 <div class="product-card border border-gray-200 rounded-lg p-3 bg-white flex flex-col relative group">
-                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-10%</span>
+                    <span class="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">-8%</span>
                     <div class="relative overflow-hidden mb-3 h-48 flex items-center justify-center p-2">
-                        <img src="https://images.unsplash.com/photo-1624701928517-44c8ac49d93c?auto=format&fit=crop&w=300&h=300" alt="PC Gaming" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
+                        <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=300&h=300" alt="MacBook Air" class="w-full h-full object-contain group-hover:scale-105 transition duration-300">
                     </div>
-                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">PC TTG ULTRA GAMING I5 14400F - RTX 5050 8GB...</h3>
+                    <h3 class="text-sm font-semibold text-gray-800 mb-2 line-clamp-2 hover:text-primary cursor-pointer leading-relaxed">MacBook Air 13" M3 (8-Core CPU - 8-Core GPU - 8GB - 256GB SSD)</h3>
                     <div class="mt-auto">
                         <div class="flex items-end justify-between mb-1">
-                            <div class="text-primary font-bold text-lg">20.680.000₫</div>
+                            <div class="text-primary font-bold text-lg">28.480.000₫</div>
                         </div>
-                        <div class="text-gray-400 text-xs line-through mb-3">22.990.000₫</div>
+                        <div class="text-gray-400 text-xs line-through mb-3">30.990.000₫</div>
                         <div class="flex items-center justify-between">
                             <button class="flex items-center text-xs font-semibold text-gray-700 border border-gray-300 rounded px-2 py-1.5 hover:border-primary hover:text-primary hover:bg-orange-50 transition">
                                 <i class="fas fa-shopping-cart text-primary mr-1"></i> THÊM VÀO GIỎ
@@ -449,11 +446,7 @@
                     <i class="fas fa-plus text-gray-500 group-hover:text-primary transition"></i>
                 </div>
                 <div class="border border-gray-200 p-4 rounded-lg flex justify-between items-center bg-gray-50 hover:bg-gray-100 cursor-pointer transition shadow-sm group">
-                    <span class="font-semibold text-sm text-gray-800 group-hover:text-primary transition">3. Miễn phí lên đời và trải nghiệm sản phẩm trong vòng 15 ngày</span>
-                    <i class="fas fa-plus text-gray-500 group-hover:text-primary transition"></i>
-                </div>
-                <div class="border border-gray-200 p-4 rounded-lg flex justify-between items-center bg-gray-50 hover:bg-gray-100 cursor-pointer transition shadow-sm group">
-                    <span class="font-semibold text-sm text-gray-800 group-hover:text-primary transition">4. Cam kết thu cũ đổi mới trọn đời với tất cả các sản phẩm Gaming Gear và linh kiện máy tính</span>
+                    <span class="font-semibold text-sm text-gray-800 group-hover:text-primary transition">4. Cam kết thu cũ đổi mới trọn đời với tất cả các sản phẩm Laptop chính hãng</span>
                     <i class="fas fa-plus text-gray-500 group-hover:text-primary transition"></i>
                 </div>
                 <div class="border border-gray-200 p-4 rounded-lg flex justify-between items-center bg-gray-50 hover:bg-gray-100 cursor-pointer transition shadow-sm group">
