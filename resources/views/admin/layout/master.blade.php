@@ -317,6 +317,11 @@
                           window.location.reload();
                       }, 2500);
                   }
+
+                  // 5. Cập nhật live dashboard nếu hàm updateLiveDashboard có tồn tại
+                  if (typeof window.updateLiveDashboard === 'function') {
+                      window.updateLiveDashboard();
+                  }
               };
 
               const handleOrderStatusUpdatedGlobal = (e) => {
@@ -341,6 +346,11 @@
                               window.location.reload();
                           }, 2500);
                       }
+                  }
+
+                  // Cập nhật live dashboard nếu hàm updateLiveDashboard có tồn tại
+                  if (typeof window.updateLiveDashboard === 'function') {
+                      window.updateLiveDashboard();
                   }
               };
 
@@ -406,6 +416,7 @@
   <!-- End plugin js for this page -->
   <!-- Custom js for this page-->
   <script src="{{ asset('js/dashboard.js') }}"></script>
+  @yield('scripts')
 
   <!-- Floating WS Status Badge -->
   <div id="ws-status-badge" style="position: fixed; bottom: 20px; left: 20px; z-index: 999999; padding: 6px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; background: #fef3c7; color: #d97706; display: flex; align-items: center; gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #fde68a; transition: all 0.3s ease;">

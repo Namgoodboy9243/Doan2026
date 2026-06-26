@@ -1,0 +1,670 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Báo cáo đồ án tốt nghiệp - SPATACUS</title>
+<!--[if gte mso 9]>
+<xml>
+ <w:WordDocument>
+  <w:View>Print</w:View>
+  <w:Zoom>100</w:Zoom>
+  <w:DoNotOptimizeForBrowser/>
+ </w:WordDocument>
+</xml>
+<![endif]-->
+<style>
+@page {
+    size: 210mm 297mm; /* Khổ A4 tiêu chuẩn */
+    margin: 20mm 20mm 20mm 25mm; /* Lề chuẩn đồ án: Trên 2, Dưới 2, Phải 2, Trái 2.5 (cm) */
+    mso-header-margin: 12.7mm;
+    mso-footer-margin: 12.7mm;
+    mso-paper-source: 0;
+}
+body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13.0pt; /* Cỡ chữ tiêu chuẩn đồ án 13pt */
+    line-height: 1.5;  /* Dãn dòng 1.5 lines */
+    color: #000000;
+}
+h1 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16.0pt;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-top: 24pt;
+    margin-bottom: 12pt;
+    border-bottom: 2px solid #ff3d00;
+    padding-bottom: 4pt;
+    page-break-before: always; /* Ngắt trang trước mỗi chương lớn */
+}
+h1:first-of-type {
+    page-break-before: avoid; /* Không ngắt trang ở tiêu đề đầu tiên */
+}
+h2 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 14.0pt;
+    font-weight: bold;
+    color: #ff3d00;
+    margin-top: 18pt;
+    margin-bottom: 8pt;
+}
+h3 {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 13.0pt;
+    font-weight: bold;
+    color: #051923;
+    margin-top: 14pt;
+    margin-bottom: 6pt;
+}
+p {
+    margin-bottom: 10pt;
+    text-indent: 12.7mm; /* Thụt đầu dòng 1.27 cm chuẩn đồ án */
+    text-align: justify;  /* Căn đều hai bên */
+}
+ul, ol {
+    margin-top: 0;
+    margin-bottom: 10pt;
+    padding-left: 20pt;
+}
+li {
+    margin-bottom: 4pt;
+    text-align: justify;
+}
+pre.code-block {
+    background-color: #f5f5f5;
+    border: 1px solid #cccccc;
+    padding: 10pt;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 10.0pt;
+    line-height: 1.2;
+    margin-bottom: 10pt;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+code.inline-code {
+    background-color: #f5f5f5;
+    padding: 1px 3px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 11.0pt;
+}
+hr {
+    border: 0;
+    border-top: 1px solid #cccccc;
+    margin: 20pt 0;
+}
+</style>
+</head>
+<body>
+    <div style="text-align: center; margin-bottom: 50pt; page-break-after: always;">
+        <br/><br/><br/>
+        <h2 style="color: #000; font-size: 20pt; font-weight: bold;">BÁO CÁO ĐỒ ÁN TỐT NGHIỆP / ĐỒ ÁN MÔN HỌC</h2>
+        <br/>
+        <h1 style="border-bottom: none; font-size: 24pt; font-weight: bold; color: #1e3a8a; page-break-before: avoid;">
+            XÂY DỰNG WEBSITE THƯƠNG MẠI ĐIỆN TỬ KINH DOANH LAPTOP TÍCH HỢP THANH TOÁN VIETQR VÀ WEB-SOCKET REALTIME
+        </h1>
+        <br/><br/><br/><br/>
+        <p style="text-align: center; font-size: 14pt; text-indent: 0;"><b>Hệ thống:</b> SPATACUS - Siêu thị Laptop chính hãng</p>
+        <p style="text-align: center; font-size: 14pt; text-indent: 0;"><b>Công nghệ:</b> PHP, Laravel Framework, MySQL, WebSockets</p>
+        <br/><br/><br/><br/><br/>
+        <p style="text-align: center; font-size: 12pt; color: #666; text-indent: 0;">Năm học: 2026</p>
+    </div>
+
+    <h1>BÁO CÁO ĐỒ ÁN TỐT NGHIỆP / ĐỒ ÁN MÔN HỌC</h1>
+<h2>ĐỀ TÀI: XÂY DỰNG WEBSITE THƯƠNG MẠI ĐIỆN TỬ KINH DOANH LAPTOP TÍCH HỢP THANH TOÁN VIETQR VÀ WEB-SOCKET REALTIME</h2>
+<strong>Hệ thống:</strong> SPATACUS - Siêu thị Laptop chính hãng
+<strong>Công nghệ sử dụng:</strong> PHP, Laravel Framework, MySQL, TailwindCSS, WebSockets (Laravel WebSockets &amp; Laravel Echo)
+
+<hr/>
+
+<h2>MỤC LỤC</h2>
+<ol>
+<li>[MỞ ĐẦU](#1-mở-đầu)</li>
+</ol>
+<ul>
+<li>1.1. Đặt vấn đề</li>
+<li>1.2. Mục tiêu đề tài</li>
+</ul>
+<ol>
+<li>[PHÂN TÍCH HỆ THỐNG VÀ YÊU CẦU](#2-phân-tích-hệ-thống-và-yêu-cầu)</li>
+</ol>
+<ul>
+<li>2.1. Yêu cầu chức năng (Functional Requirements)</li>
+<li>2.2. Yêu cầu phi chức năng (Non-Functional Requirements)</li>
+<li>2.3. Sơ đồ Ca sử dụng (Use Case Diagram)</li>
+</ul>
+<ol>
+<li>[KIẾN TRÚC HỆ THỐNG &amp; CÔNG NGHỆ](#3-kiến-trúc-hệ-thống--công-nghệ)</li>
+</ol>
+<ul>
+<li>3.1. Công nghệ Frontend</li>
+<li>3.2. Công nghệ Backend</li>
+<li>3.3. Cơ sở dữ liệu MySQL</li>
+<li>3.4. Công nghệ WebSockets &amp; Cơ chế thanh toán Realtime</li>
+</ul>
+<ol>
+<li>[THIẾT KẾ CƠ SỞ DỮ LIỆU (DATABASE SCHEMA)](#4-thiết-kế-cơ-sở-dữ-liệu-database-schema)</li>
+</ol>
+<ul>
+<li>4.1. Sơ đồ mối quan hệ thực thể (ERD)</li>
+<li>4.2. Đặc tả chi tiết các bảng cơ sở dữ liệu</li>
+</ul>
+<ol>
+<li>[CHI TIẾT THIẾT KẾ &amp; TRIỂN KHAI CÁC CHỨC NĂNG](#5-chi-tiết-thiết-kế--triển-khai-các-chức-năng)</li>
+</ol>
+<ul>
+<li>5.1. Phân hệ khách hàng (Frontend Client)</li>
+<li>5.2. Phân hệ quản trị viên (Admin Portal)</li>
+</ul>
+<ol>
+<li>[GIẢI PHÁP CÔNG NGHỆ NÂNG CAO VÀ ĐỘC ĐÁO](#6-giải-pháp-công-nghệ-nâng-cao-và-độc-đáo)</li>
+</ol>
+<ul>
+<li>6.1. Quy trình thanh toán tự động VietQR đồng bộ Realtime</li>
+<li>6.2. Thuật toán khôi phục giỏ hàng khi hủy đơn hàng QR</li>
+<li>6.3. Hệ thống WebSockets và Trạng thái kết nối thời gian thực</li>
+</ul>
+<ol>
+<li>[HƯỚNG DẪN CÀI ĐẶT VÀ CẤU HÌNH](#7-hướng-dẫn-cài-đặt-và-cấu-hình)</li>
+</ol>
+<ul>
+<li>7.1. Yêu cầu hệ thống</li>
+<li>7.2. Các bước triển khai</li>
+</ul>
+<ol>
+<li>[KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN](#8-kết-luận-và-hướng-phát-triển)</li>
+</ol>
+<ul>
+<li>8.1. Kết quả đạt được</li>
+<li>8.2. Hạn chế và hướng phát triển tương lai</li>
+</ul>
+
+<hr/>
+
+<h2>1. MỞ ĐẦU</h2>
+
+<h3>1.1. Đặt vấn đề</h3>
+Cùng với sự phát triển mạnh mẽ của thương mại điện tử (E-Commerce), việc mua sắm thiết bị công nghệ cao trực tuyến, đặc biệt là Laptop, ngày càng phổ biến. Tuy nhiên, việc bán mặt hàng laptop trực tuyến gặp một số khó khăn đặc thù:
+<ul>
+<li>Mỗi dòng laptop có nhiều phiên bản cấu hình khác nhau (CPU, RAM, ổ cứng, màu sắc) dẫn đến giá thành khác nhau. Việc xây dựng một trang web quản lý tốt sản phẩm có cấu trúc phân lớp biến thể (Variants) là bắt buộc.</li>
+<li>Quy trình thanh toán truyền thống bằng chuyển khoản ngân hàng thủ công gây nhiều rủi ro: Khách chuyển tiền xong phải chụp màn hình gửi cho nhân viên xác nhận thủ công, hoặc nếu khách quên ấn xác nhận trên website sau khi chuyển khoản thì đơn hàng không được ghi nhận trong cơ sở dữ liệu.</li>
+<li>Nhân viên quản lý đơn hàng (Admin) thiếu tính năng nhận dạng thời gian thực khi có khách hàng đặt mua, làm giảm tốc độ xử lý đơn hàng.</li>
+</ul>
+
+<p>Để giải quyết các vấn đề trên, đề tài <strong>"Xây dựng Website thương mại điện tử kinh doanh Laptop tích hợp thanh toán VietQR và Web-Socket Realtime"</strong> được đề xuất và phát triển dựa trên hệ thống <strong>SPATACUS</strong>.</p>
+
+<h3>1.2. Mục tiêu đề tài</h3>
+<ul>
+<li>Xây dựng một website thương mại điện tử kinh doanh Laptop hoàn chỉnh với giao diện responsive, hiện đại sử dụng TailwindCSS.</li>
+<li>Thiết kế cơ sở dữ liệu tối ưu cho phép quản lý sản phẩm có nhiều biến thể cấu hình linh hoạt.</li>
+<li>Tích hợp giải pháp thanh toán tự động thông minh bằng VietQR kết hợp cơ chế Client Long-Polling giúp kiểm tra trạng thái thanh toán tự động theo thời gian thực mà không cần người dùng thao tác thủ công.</li>
+<li>Tích hợp hệ thống WebSockets độc lập giúp đẩy thông tin đơn hàng mới đến Admin thời gian thực, đồng thời hiển thị trực quan trạng thái kết nối WebSocket đến người dùng.</li>
+</ul>
+
+<hr/>
+
+<h2>2. PHÂN TÍCH HỆ THỐNG VÀ YÊU CẦU</h2>
+
+<h3>2.1. Yêu cầu chức năng (Functional Requirements)</h3>
+Hệ thống được phân chia làm hai phân hệ chính:
+
+<h4>A. Phân hệ Khách hàng (Client Portal)</h4>
+<ol>
+<li><strong>Xem và tìm kiếm sản phẩm:</strong> Xem danh sách laptop theo các danh mục chuyên biệt (Gaming, Văn phòng, Đồ họa, Macbook...). Tìm kiếm sản phẩm thông minh bằng thanh công cụ có tính năng gợi ý kết quả tức thời (Search Suggestions).</li>
+<li><strong>Chi tiết sản phẩm nâng cao:</strong> Xem hình ảnh chi tiết (Album ảnh sản phẩm), chọn lựa cấu hình biến thể (CPU, RAM, ổ cứng, màu sắc) và xem giá tương ứng thời gian thực.</li>
+<li><strong>Quản lý giỏ hàng:</strong> Thêm sản phẩm theo biến thể vào giỏ hàng, cập nhật số lượng, xóa sản phẩm bằng AJAX mượt mà.</li>
+<li><strong>In báo giá (Print Quotation):</strong> Cho phép người dùng xuất hóa đơn báo giá tạm thời của giỏ hàng ra file PDF hoặc bản in giấy với thuật toán chuyển đổi tổng số tiền từ số thành chữ tiếng Việt chính xác.</li>
+<li><strong>Thanh toán đa phương thức:</strong></li>
+</ol>
+<ul>
+<li>Đặt hàng COD (Thanh toán khi nhận hàng).</li>
+<li>Thanh toán qua cổng VNPAY.</li>
+<li>Thanh toán VietQR Realtime tự động: Hệ thống tạo đơn hàng tạm, hiển thị mã QR động chứa số tiền và nội dung chuyển khoản định danh duy nhất. Hệ thống tự động lắng nghe giao dịch thành công và chuyển hướng trang.</li>
+</ul>
+<ol>
+<li><strong>Lịch sử mua hàng:</strong> Theo dõi trạng thái đơn hàng (Chờ xác nhận, Chờ thanh toán, Đang chuẩn bị, Đang giao, Đã giao, Đã hủy). Khách hàng có quyền hủy các đơn hàng đang ở trạng thái chờ xác nhận hoặc chờ thanh toán (hệ thống tự động hoàn kho và phục hồi giỏ hàng cũ).</li>
+<li><strong>Đăng ký/Đăng nhập:</strong> Xác thực tài khoản khách hàng thông thường để lưu vết mua sắm.</li>
+</ol>
+
+<h4>B. Phân hệ Quản trị (Admin Portal)</h4>
+<ol>
+<li><strong>Quản trị danh mục:</strong> Thêm, sửa, xóa các danh mục sản phẩm (Laptop Gaming, Đồ họa...).</li>
+<li><strong>Quản trị sản phẩm và biến thể:</strong> Thêm mới sản phẩm, tải lên ảnh đại diện và bộ sưu tập ảnh chi tiết. Quản lý danh sách các cấu hình biến thể (CPU, RAM, Storage, Color, Price, Stock) tương ứng của từng máy.</li>
+<li><strong>Quản trị đơn hàng:</strong> Xem danh sách đơn hàng toàn hệ thống với các bộ lọc trạng thái và thống kê metrics quan trọng (doanh thu thực tế, số đơn chờ xử lý, số đơn hoàn thành...).</li>
+<li><strong>Cập nhật trạng thái đơn hàng:</strong> Đổi trạng thái đơn hàng và tự động cập nhật số lượng tồn kho của sản phẩm tương ứng (Hoàn kho khi đơn bị hủy, Trừ kho khi đơn hoạt động trở lại).</li>
+<li><strong>Nhận thông báo Realtime:</strong> Hệ thống nhận thông báo tức thời thông qua WebSocket khi có khách đặt hàng mới hoặc hủy hàng mà không cần tải lại trang.</li>
+</ol>
+
+<h3>2.2. Yêu cầu phi chức năng (Non-Functional Requirements)</h3>
+<ul>
+<li><strong>Hiệu năng &amp; Tốc độ phản hồi:</strong> Tốc độ tải trang nhanh, các tác vụ thêm giỏ hàng, gợi ý tìm kiếm, tạo đơn thanh toán QR phải được thực hiện thông qua AJAX để tránh giật lag UI.</li>
+<li><strong>Trải nghiệm người dùng (UX):</strong> Thiết kế giao diện hiện đại, trực quan, có các hiệu ứng chuyển động khi hover và hệ thống Toast thông báo mượt mà. Màn hình thanh toán QR có hiệu ứng đếm ngược và hình hoạt họa checkmark thành công chuyên nghiệp.</li>
+<li><strong>Độ tin cậy của quy trình thanh toán:</strong> Ngăn chặn tuyệt đối tình trạng khách chuyển khoản thành công nhưng đơn hàng không được ghi nhận trong cơ sở dữ liệu.</li>
+<li><strong>Khả năng đáp ứng thiết bị:</strong> Tương thích hoàn toàn trên thiết bị di động, máy tính bảng và máy tính để bàn (Responsive).</li>
+</ul>
+
+<h3>2.3. Sơ đồ Ca sử dụng (Use Case Diagram)</h3>
+Dưới đây là sơ đồ mô tả các tác nhân và hành vi tương tác với hệ thống:
+
+
+
+<pre class='code-block'><b>[mermaid]</b>
+usecaseDiagram
+    actor "Khách Hàng (Customer)" as customer
+    actor "Quản Trị Viên (Admin)" as admin
+
+<p>rectangle "Hệ Thống Laptop SPATACUS" {<br />
+        usecase "Đăng nhập / Đăng ký" as UC_Auth<br />
+        usecase "Tìm kiếm &amp; Xem sản phẩm" as UC_View<br />
+        usecase "Quản lý giỏ hàng &amp; In báo giá" as UC_Cart<br />
+        usecase "Thanh toán VietQR Realtime" as UC_PayQR<br />
+        usecase "Thanh toán COD / VNPAY" as UC_PayOthers<br />
+        usecase "Theo dõi &amp; Hủy đơn hàng" as UC_History<br />
+        <br />
+        usecase "Quản lý Sản phẩm &amp; Biến thể" as UC_ManageProducts<br />
+        usecase "Quản lý Đơn hàng &amp; Kho hàng" as UC_ManageOrders<br />
+        usecase "Theo dõi Metrics &amp; Doanh thu" as UC_Dashboard<br />
+        usecase "Nhận thông báo đơn hàng Realtime" as UC_WSNotify<br />
+    }</p>
+
+<p>customer --&gt; UC_Auth<br />
+    customer --&gt; UC_View<br />
+    customer --&gt; UC_Cart<br />
+    customer --&gt; UC_PayQR<br />
+    customer --&gt; UC_PayOthers<br />
+    customer --&gt; UC_History</p>
+
+<p>admin --&gt; UC_Auth<br />
+    admin --&gt; UC_ManageProducts<br />
+    admin --&gt; UC_ManageOrders<br />
+    admin --&gt; UC_Dashboard<br />
+    admin --&gt; UC_WSNotify</pre></p>
+
+
+
+<hr/>
+
+<h2>3. KIẾN TRÚC HỆ THỐNG &amp; CÔNG NGHỆ</h2>
+
+<p>Hệ thống được xây dựng trên mô hình MVC (Model - View - Controller) chuẩn của Laravel Framework, mang lại sự độc lập giữa cơ sở dữ liệu, logic nghiệp vụ và giao diện hiển thị.</p>
+
+
+
+<pre class='code-block'><b>[]</b>
+┌──────────────────────────────┐
+                  │          Trình duyệt         │
+                  │ (TailwindCSS, Echo, VietQR)  │
+                  └──────────────┬───────────────┘
+                                 │ AJAX / HTTP Requests
+                                 ▼
+                  ┌──────────────────────────────┐
+                  │      Laravel Controller      │
+                  │   (Home &amp; Admin Controller)  │
+                  └──────────────┬───────────────┘
+                     ▲           │           ▲
+        Eloquent ORM │           │ SQL       │ Dispatch Events
+                     ▼           ▼           ▼
+       ┌───────────────────┐ ┌───────────┐ ┌───────────────────┐
+       │   Models &amp; DB     │ │   MySQL   │ │  WebSockets Server│
+       │ (User, Order,...) │ │  Database │ │ (Pusher Protocol) │
+       └───────────────────┘ └───────────┘ └───────────────────┘</pre>
+
+
+
+<h3>3.1. Công nghệ Frontend</h3>
+<ul>
+<li><strong>TailwindCSS (v3.x - CDN):</strong> Sử dụng các utility classes để xây dựng giao diện nhanh, tối ưu hóa CSS sinh ra, tùy biến bảng màu sắc sinh động (màu chủ đạo <code class="inline-code">primary: #ff3d00</code> rực rỡ, tông nền tối <code class="inline-code">darkBg: #051923</code> cao cấp).</li>
+<li><strong>JavaScript (Vanilla ES6):</strong> Xử lý toàn bộ luồng gọi AJAX (Fetch API) để thực hiện tìm kiếm suggestions, thêm giỏ hàng, gọi API kiểm tra trạng thái thanh toán QR và hiển thị thông báo.</li>
+<li><strong>FontAwesome (v6.4.0):</strong> Cung cấp hệ thống biểu tượng (icons) sắc nét phục vụ giao diện thiết kế chuyên nghiệp.</li>
+</ul>
+
+<h3>3.2. Công nghệ Backend</h3>
+<ul>
+<li><strong>Laravel Framework (v8.75):</strong> Framework PHP mạnh mẽ cung cấp các module định tuyến (Routing), quản lý Session, bảo mật chống tấn công XSS, CSRF, SQL Injection, và quản lý Database thông qua Eloquent ORM.</li>
+<li><strong>Laravel Events &amp; Listeners:</strong> Phát các sự kiện <code class="inline-code">OrderPlaced</code> và <code class="inline-code">OrderStatusUpdated</code> để tự động thông báo đến các kênh liên kết thời gian thực.</li>
+<li><strong>PHP Session:</strong> Lưu trữ trạng thái giỏ hàng độc lập trước khi khách hàng tiến hành thanh toán, giảm tải cho cơ sở dữ liệu.</li>
+</ul>
+
+<h3>3.3. Cơ sở dữ liệu MySQL</h3>
+Hệ thống sử dụng cơ sở dữ liệu quan hệ MySQL để quản trị dữ liệu đồng bộ và toàn vẹn thông tin thông qua cơ chế khóa ngoại và ràng buộc (Cascading).
+
+<h3>3.4. Công nghệ WebSockets &amp; Cơ chế thanh toán Realtime</h3>
+<ul>
+<li><strong>beyondcode/laravel-websockets:</strong> Gói thư viện giúp tự khởi chạy một máy chủ WebSocket độc lập chạy trên nền tảng PHP tương thích giao thức Pusher, loại bỏ sự phụ thuộc vào các dịch vụ bên thứ ba có phí.</li>
+<li><strong>Laravel Echo &amp; Pusher JS CDN:</strong> Thư viện JavaScript chạy ở Client giúp đăng ký kênh (Channels) và lắng nghe các sự kiện phát đi từ Backend Server một cách dễ dàng.</li>
+<li><strong>VietQR API &amp; Client Long-Polling:</strong> Giải pháp quét mã QR đồng bộ trạng thái tự động không phụ thuộc vào Webhook ngân hàng phức tạp bằng cách thực hiện Polling định kỳ mỗi 3 giây thông qua AJAX an toàn.</li>
+</ul>
+
+<hr/>
+
+<h2>4. THIẾT KẾ CƠ SỞ DỮ LIỆU (DATABASE SCHEMA)</h2>
+
+<h3>4.1. Sơ đồ mối quan hệ thực thể (ERD)</h3>
+Dưới đây là thiết kế mối liên kết giữa các bảng chính trong hệ thống bán laptop SPATACUS:
+
+
+
+<pre class='code-block'><b>[mermaid]</b>
+erDiagram
+    CATEGORIES ||--o{ PRODUCTS : "chua"
+    PRODUCTS ||--o{ PRODUCT_VARIANTS : "co nhieu"
+    PRODUCTS ||--o{ PRODUCT_IMAGES : "co nhieu"
+    CUSTOMERS ||--o{ ORDERS : "dat mua"
+    ORDERS ||--o{ ORDER_DETAILS : "chi tiet"
+    PRODUCTS ||--o{ ORDER_DETAILS : "thuoc ve"
+    PRODUCT_VARIANTS ||--o| ORDER_DETAILS : "ap dung cho"
+    USERS {
+        int id PK
+        string name
+        string email
+        string password
+        tinyint is_admin
+    }</pre>
+
+
+
+<h3>4.2. Đặc tả chi tiết các bảng cơ sở dữ liệu</h3>
+
+<h4>1. Bảng <code class="inline-code">categories</code> (Danh mục sản phẩm)</h4>
+Lưu trữ thông tin phân loại laptop phục vụ việc gom nhóm sản phẩm.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã danh mục.</li>
+<li><code class="inline-code">name</code> (VARCHAR(255), Unique): Tên danh mục (ví dụ: Laptop Gaming, Ultrabook Mỏng Nhẹ...).</li>
+<li><code class="inline-code">status</code> (TINYINT): Trạng thái hiển thị (1: Hoạt động, 0: Ẩn).</li>
+<li><code class="inline-code">created_at</code> &amp; <code class="inline-code">updated_at</code>: Thời gian khởi tạo và cập nhật.</li>
+</ul>
+
+<h4>2. Bảng <code class="inline-code">products</code> (Sản phẩm chính)</h4>
+Lưu trữ thông tin cơ bản, mô tả chung của từng dòng máy laptop.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã sản phẩm.</li>
+<li><code class="inline-code">name</code> (VARCHAR(200), Unique): Tên đầy đủ của sản phẩm laptop.</li>
+<li><code class="inline-code">price</code> (FLOAT(20,3)): Giá gốc của dòng sản phẩm.</li>
+<li><code class="inline-code">sale_price</code> (FLOAT(20,3)): Giá khuyến mại (nếu có).</li>
+<li><code class="inline-code">image</code> (VARCHAR(255)): Ảnh đại diện chính của sản phẩm.</li>
+<li><code class="inline-code">category_id</code> (INT UNSIGNED, Foreign Key): Liên kết đến bảng <code class="inline-code">categories(id)</code>.</li>
+<li><code class="inline-code">status</code> (TINYINT): Trạng thái hiển thị (1: Đang bán, 0: Ngừng bán).</li>
+<li><code class="inline-code">description</code> (TEXT): Mô tả chi tiết cấu hình và đặc tính của sản phẩm.</li>
+<li><code class="inline-code">created_at</code> &amp; <code class="inline-code">updated_at</code>: Thời gian khởi tạo và cập nhật.</li>
+</ul>
+
+<h4>3. Bảng <code class="inline-code">product_variants</code> (Biến thể cấu hình sản phẩm)</h4>
+Lưu trữ các cấu hình chi tiết khác nhau của cùng một dòng sản phẩm chính.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã biến thể.</li>
+<li><code class="inline-code">product_id</code> (INT UNSIGNED, Foreign Key): Liên kết đến bảng <code class="inline-code">products(id)</code> (Cascade delete).</li>
+<li><code class="inline-code">sku</code> (VARCHAR(100), Nullable): Mã ký hiệu quản lý kho của biến thể cấu hình.</li>
+<li><code class="inline-code">cpu</code> (VARCHAR(100), Nullable): Tên bộ vi xử lý (ví dụ: Intel Core i7-13700H, AMD Ryzen 7 7840HS).</li>
+<li><code class="inline-code">ram</code> (VARCHAR(50), Nullable): Dung lượng RAM (ví dụ: 16GB DDR5, 32GB DDR5).</li>
+<li><code class="inline-code">storage</code> (VARCHAR(100), Nullable): Dung lượng lưu trữ (ví dụ: 512GB SSD PCIe NVMe, 1TB SSD).</li>
+<li><code class="inline-code">color</code> (VARCHAR(50), Nullable): Màu sắc máy (ví dụ: Storm Grey, Obsidian Black).</li>
+<li><code class="inline-code">price</code> (FLOAT(20,3)): Giá bán riêng của cấu hình này.</li>
+<li><code class="inline-code">stock</code> (INT): Số lượng hàng có sẵn trong kho của cấu hình này.</li>
+<li><code class="inline-code">created_at</code> &amp; <code class="inline-code">updated_at</code>: Thời gian khởi tạo và cập nhật.</li>
+</ul>
+
+<h4>4. Bảng <code class="inline-code">product_images</code> (Bộ sưu tập ảnh chi tiết)</h4>
+Lưu trữ album ảnh chi tiết bổ sung cho sản phẩm nhằm tăng tính thuyết phục của sản phẩm.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã hình ảnh.</li>
+<li><code class="inline-code">product_id</code> (INT UNSIGNED, Foreign Key): Liên kết đến bảng <code class="inline-code">products(id)</code> (Cascade delete).</li>
+<li><code class="inline-code">image</code> (VARCHAR(255)): Đường dẫn tập tin hình ảnh.</li>
+<li><code class="inline-code">type</code> (TINYINT): Phân loại định dạng ảnh hiển thị (1: Ảnh góc cạnh, 2: Ảnh tính năng...).</li>
+<li><code class="inline-code">sort_order</code> (INT): Thứ tự sắp xếp hiển thị trên slide album.</li>
+<li><code class="inline-code">created_at</code> &amp; <code class="inline-code">updated_at</code>: Thời gian khởi tạo và cập nhật.</li>
+</ul>
+
+<h4>5. Bảng <code class="inline-code">customers</code> (Khách hàng mua hàng)</h4>
+Lưu trữ thông tin khách hàng mua hàng phục vụ quản trị và theo dõi hành vi mua sắm.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã khách hàng.</li>
+<li><code class="inline-code">name</code> (VARCHAR(200)): Họ tên khách hàng.</li>
+<li><code class="inline-code">email</code> (VARCHAR(255), Unique): Địa chỉ email.</li>
+<li><code class="inline-code">phone</code> (VARCHAR(20), Unique): Số điện thoại liên lạc.</li>
+<li><code class="inline-code">address</code> (VARCHAR(255)): Địa chỉ giao nhận mặc định.</li>
+<li><code class="inline-code">password</code> (VARCHAR(255)): Mật khẩu đã mã hóa Hash phục vụ đăng nhập.</li>
+<li><code class="inline-code">created_at</code> &amp; <code class="inline-code">updated_at</code>: Thời gian khởi tạo và cập nhật.</li>
+</ul>
+
+<h4>6. Bảng <code class="inline-code">orders</code> (Đơn đặt hàng)</h4>
+Lưu trữ thông tin tổng quát về hóa đơn đặt hàng của khách hàng.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã đơn hàng.</li>
+<li><code class="inline-code">name</code> (VARCHAR(200)): Họ tên người nhận hàng.</li>
+<li><code class="inline-code">email</code> (VARCHAR(255), Nullable): Email người nhận.</li>
+<li><code class="inline-code">phone</code> (VARCHAR(20), Nullable): Số điện thoại nhận hàng.</li>
+<li><code class="inline-code">address</code> (VARCHAR(255), Nullable): Địa chỉ chi tiết nhận hàng.</li>
+<li><code class="inline-code">customer_id</code> (INT UNSIGNED, Foreign Key): Liên kết đến bảng <code class="inline-code">customers(id)</code>.</li>
+<li><code class="inline-code">status</code> (TINYINT): Trạng thái đơn hàng (1: Chờ xác nhận, 5: Chờ thanh toán QR, 2: Đang chuẩn bị/Đã thanh toán, 3: Đang giao, 4: Đã giao, 0: Đã hủy).</li>
+<li><code class="inline-code">created_at</code> &amp; <code class="inline-code">updated_at</code>: Thời gian đặt hàng và cập nhật.</li>
+</ul>
+
+<h4>7. Bảng <code class="inline-code">order_details</code> (Chi tiết đơn đặt hàng)</h4>
+Liên kết n-n giữa sản phẩm, biến thể sản phẩm và đơn đặt hàng.
+<ul>
+<li><code class="inline-code">order_id</code> (INT UNSIGNED, Foreign Key): Liên kết đến bảng <code class="inline-code">orders(id)</code>.</li>
+<li><code class="inline-code">product_id</code> (INT UNSIGNED, Foreign Key): Liên kết đến bảng <code class="inline-code">products(id)</code>.</li>
+<li><code class="inline-code">variant_id</code> (INT UNSIGNED, Foreign Key, Nullable): Liên kết đến bảng <code class="inline-code">product_variants(id)</code>.</li>
+<li><code class="inline-code">quantity</code> (INT): Số lượng đặt mua của cấu hình sản phẩm đó.</li>
+<li><code class="inline-code">price</code> (FLOAT(20,3)): Đơn giá thực tế tại thời điểm mua.</li>
+<li>Khóa chính kết hợp: <code class="inline-code">(order_id, product_id, variant_id)</code> hoặc <code class="inline-code">(order_id, product_id)</code> với <code class="inline-code">variant_id</code> tương thích.</li>
+</ul>
+
+<h4>8. Bảng <code class="inline-code">users</code> (Tài khoản người dùng hệ thống)</h4>
+Lưu trữ thông tin tài khoản người dùng đăng nhập hệ thống.
+<ul>
+<li><code class="inline-code">id</code> (INT UNSIGNED, Primary Key, Auto Increment): Mã định danh.</li>
+<li><code class="inline-code">name</code> (VARCHAR(255)): Tên hiển thị người dùng.</li>
+<li><code class="inline-code">email</code> (VARCHAR(255), Unique): Email đăng nhập.</li>
+<li><code class="inline-code">password</code> (VARCHAR(255)): Mật khẩu đã mã hóa Hash.</li>
+<li><code class="inline-code">is_admin</code> (TINYINT): Phân quyền tài khoản (1: Quản trị viên Admin, 0: Khách hàng thành viên).</li>
+</ul>
+
+<hr/>
+
+<h2>5. CHI TIẾT THIẾT KẾ &amp; TRIỂN KHAI CÁC CHỨC NĂNG</h2>
+
+<h3>5.1. Phân hệ khách hàng (Frontend Client)</h3>
+
+<h4>A. Trang chủ &amp; Tìm kiếm thông minh (Search &amp; Suggestions)</h4>
+<ul>
+<li>Trang chủ hiển thị danh sách sản phẩm theo từng nhóm danh mục như "Laptop Gaming" và "Laptop Ultrabook Mỏng Nhẹ".</li>
+<li>Hệ thống tìm kiếm tích hợp tính năng gợi ý kết quả tự động bằng AJAX. Khi người dùng nhập từ 2 ký tự trở lên vào ô tìm kiếm, trình duyệt sẽ gửi request bất đồng bộ đến route <code class="inline-code">search/suggestions</code>. Backend thực hiện tìm kiếm gần đúng trên tên sản phẩm, thông số CPU, RAM hoặc mô tả, sau đó trả về danh sách JSON gồm 6 sản phẩm khớp nhất bao gồm ảnh thu nhỏ, tên sản phẩm và giá khuyến mại. Trình duyệt render kết quả lập tức giúp khách hàng truy cập nhanh sản phẩm cần tìm.</li>
+</ul>
+
+<h4>B. Giao diện chi tiết sản phẩm và chọn cấu hình</h4>
+<ul>
+<li>Trang chi tiết sản phẩm hiển thị slide hình ảnh chi tiết tải lên từ bảng <code class="inline-code">product_images</code> sắp xếp theo thứ tự hiển thị.</li>
+<li>Khi người dùng bấm chọn các cấu hình biến thể khác nhau (ví dụ: đổi từ bản RAM 16GB sang bản RAM 32GB), JavaScript sẽ tự động tính toán cập nhật đơn giá hiển thị tương ứng, đồng thời thay đổi mã SKU và hiển thị tình trạng còn hàng hay hết hàng dựa vào thuộc tính <code class="inline-code">stock</code> trong dữ liệu biến thể.</li>
+</ul>
+
+<h4>C. Giỏ hàng &amp; In báo giá (convertNumberToWords)</h4>
+<ul>
+<li>Giỏ hàng được lưu trữ trong session giúp khách hàng thoải mái thay đổi số lượng, xóa hoặc thêm mới. Giao diện giỏ hàng hỗ trợ in báo giá tạm thời bằng cách nhập thông tin và nhấn nút xuất báo giá. </li>
+<li>Hệ thống hỗ trợ in báo giá chuẩn hóa với thuật toán <code class="inline-code">convertNumberToWords</code> trong <code class="inline-code">Homecontroller.php</code>. Thuật toán này phân tích số tiền của giỏ hàng thành các nhóm hàng trăm, hàng chục và hàng đơn vị, tự động chuyển đổi sang chữ tiếng Việt tự nhiên và chuẩn văn phong kế toán (ví dụ: chuyển <code class="inline-code">25.500.000</code> thành *"Hai mươi nhăm triệu năm trăm nghìn đồng chẵn"*).</li>
+</ul>
+
+<h3>5.2. Phân hệ quản trị viên (Admin Portal)</h3>
+
+<h4>A. Quản lý sản phẩm nâng cao</h4>
+<ul>
+<li>Giao diện Admin cho phép thêm mới sản phẩm kèm theo biểu mẫu động để bổ sung nhiều biến thể cấu hình cùng lúc. Admin có thể ấn nút "Thêm cấu hình" để điền thêm các thông số CPU, RAM, ổ cứng, màu sắc, giá bán riêng biệt và số lượng tồn kho.</li>
+<li>Hệ thống upload đa tệp tin (Multi-upload) hỗ trợ tải lên album ảnh chi tiết sản phẩm cùng lúc và thiết lập thứ tự hiển thị cho từng ảnh. Khi sửa sản phẩm, hệ thống hỗ trợ xóa từng ảnh chi tiết riêng biệt bằng AJAX mà không làm ảnh hưởng đến dữ liệu chính của sản phẩm.</li>
+</ul>
+
+<h4>B. Quản lý đơn hàng &amp; Cập nhật trạng thái an toàn</h4>
+<ul>
+<li>Trang danh sách đơn hàng của Admin tích hợp bảng metrics thống kê số lượng đơn theo từng trạng thái và biểu đồ hiển thị tổng doanh thu từ các đơn hàng đã hoàn thành công việc giao hàng (<code class="inline-code">status = 4</code>).</li>
+<li>Trạng thái đơn hàng được Admin cập nhật thông qua form an toàn. Khi Admin chuyển trạng thái của một đơn hàng từ trạng thái hoạt động sang "Đã hủy" (<code class="inline-code">status = 0</code>), Backend sẽ tự động lấy thông tin chi tiết đơn hàng và thực hiện cộng hoàn trả số lượng sản phẩm vào kho hàng tương ứng của từng biến thể cấu hình nhằm chống thất thoát dữ liệu tồn kho. Ngược lại, nếu khôi phục một đơn hàng đã hủy về hoạt động, hệ thống sẽ tự động trừ kho hàng trở lại sau khi kiểm tra tính khả dụng của số lượng sản phẩm.</li>
+</ul>
+
+<hr/>
+
+<h2>6. GIẢI PHÁP CÔNG NGHỆ NÂNG CAO VÀ ĐỘC ĐÁO</h2>
+
+<h3>6.1. Quy trình thanh toán tự động VietQR đồng bộ Realtime</h3>
+
+<p>Quy trình thanh toán QR Code truyền thống yêu cầu khách hàng thực hiện chuyển khoản sau đó phải tự bấm nút xác nhận giao dịch. Nếu khách hàng lỡ tay tắt trình duyệt sau khi chuyển khoản, đơn hàng sẽ bị mất dấu. Để giải quyết triệt để rủi ro này, dự án SPATACUS đã triển khai quy trình tạo đơn hàng động VietQR kết hợp Long-Polling như sau:<br />
+<ol><br />
+<li><strong>Khởi tạo đơn hàng trước</strong>: Khi người dùng nhấn nút *"Thanh toán bằng QR Code"*, hệ thống gửi AJAX lên Backend tạo đơn hàng tức thì với trạng thái <strong>"Chờ thanh toán" (status = 5)</strong>.</li><br />
+<li><strong>Định danh mã QR động</strong>: Backend lưu đơn hàng, trả về <code class="inline-code">order_id</code>. Frontend lấy ID này để tạo mã VietQR động chứa nội dung chuyển khoản duy nhất và định danh: <code class="inline-code">TTGSHOP DH{order_id}</code> (ví dụ: <code class="inline-code">TTGSHOP DH102</code>).</li><br />
+<li><strong>Tiến trình Long-Polling tự động</strong>: Trình duyệt kích hoạt hàm kiểm tra định kỳ <code class="inline-code">checkPaymentPolling</code> gửi yêu cầu lên máy chủ mỗi 3 giây thông qua API <code class="inline-code">checkout/check-status/{order_id}</code> để kiểm tra trạng thái đơn hàng trong DB.</li><br />
+<li><strong>Nhận diện thanh toán thành công</strong>: Khi ngân hàng nhận tiền chuyển khoản và cập nhật trạng thái đơn hàng thành <strong>"Đang chuẩn bị" (status = 2)</strong> (có thể kiểm thử giả lập nhanh bằng nút *"Giả lập thanh toán thành công"* gọi đến API <code class="inline-code">simulatePayment</code>), API Polling sẽ trả về <code class="inline-code">{ paid: true }</code>.</li><br />
+<li><strong>Hiển thị hiệu ứng và tự động chuyển hướng</strong>: Ngay khi nhận được phản hồi thành công, giao diện Modal QR sẽ biến đổi mượt mà sang trạng thái thành công với hiệu ứng hoạt họa vòng tròn checkmark xanh lá và tự động đếm ngược 3 giây để chuyển hướng khách hàng về trang lịch sử đơn hàng.</li><br />
+</ol></p>
+
+
+
+<pre class='code-block'><b>[mermaid]</b>
+sequenceDiagram
+    actor Khach as Khách hàng
+    participant Client as Trình duyệt (Client)
+    participant Server as Máy chủ (Laravel Backend)
+    participant Bank as Ngân hàng (Ví dụ/Giả lập)
+
+<p>Khach-&gt;&gt;Client: Bấm nút "Thanh toán QR"<br />
+    Client-&gt;&gt;Server: Gửi AJAX checkoutAjax()<br />
+    Server-&gt;&gt;Server: Tạo đơn hàng tạm (Status = 5)<br />
+    Server--&gt;&gt;Client: Trả về order_id = 105<br />
+    Client-&gt;&gt;Client: Sinh mã VietQR động chứa nội dung "TTGSHOP DH105"<br />
+    Client-&gt;&gt;Khach: Hiển thị Modal quét mã QR<br />
+    <br />
+    rect rgb(240, 248, 255)<br />
+        note right of Client: Bắt đầu vòng lặp Long-Polling (mỗi 3 giây)<br />
+        loop Định kỳ 3s/lần<br />
+            Client-&gt;&gt;Server: GET checkout/check-status/105<br />
+            Server--&gt;&gt;Client: Trả về { paid: false, status: 5 }<br />
+        end<br />
+    end</p>
+
+<p>Khach-&gt;&gt;Bank: Quét QR trên App Ngân hàng &amp; chuyển tiền thành công<br />
+    Bank-&gt;&gt;Server: Cập nhật trạng thái đơn hàng hoặc giả lập simulatePayment(105)<br />
+    Server-&gt;&gt;Server: Chuyển đổi trạng thái đơn hàng 105 thành Status = 2 (Đã thanh toán)</p>
+
+<p>Client-&gt;&gt;Server: GET checkout/check-status/105<br />
+    Server--&gt;&gt;Client: Trả về { paid: true, status: 2 }<br />
+    <br />
+    note over Client: Dừng vòng lặp Polling<br />
+    Client-&gt;&gt;Client: Kích hoạt hiệu ứng checkmark thành công 🌟<br />
+    Client-&gt;&gt;Khach: Tự động chuyển hướng sang Lịch sử đơn hàng sau 3 giây</pre></p>
+
+
+
+<h3>6.2. Thuật toán khôi phục giỏ hàng khi hủy đơn hàng QR</h3>
+Một tính năng nổi bật khác trong trải nghiệm người dùng của hệ thống là khả năng hủy giao dịch thanh toán QR động.
+<ul>
+<li><strong>Vấn đề</strong>: Khi khách hàng đã bấm thanh toán QR, giỏ hàng trong Session đã bị xóa để tránh việc đặt hàng lặp lại, đồng thời số lượng tồn kho sản phẩm đã bị trừ để giữ hàng cho khách trong thời gian chờ thanh toán. Nếu khách hàng không muốn mua nữa và bấm nút *"Hủy giao dịch"* trên Modal, đơn hàng tạm trong DB cần được dọn dẹp và trả lại trạng thái cũ cho khách.</li>
+<li><strong>Giải pháp</strong>: Hệ thống cung cấp API <code class="inline-code">checkout/cancel-order/{id}</code>. Khi khách hàng nhấn hủy giao dịch QR:</li>
+</ul>
+<ol>
+<li>Backend truy vấn các chi tiết mặt hàng thuộc đơn hàng tạm đó.</li>
+<li>Thực hiện cộng trả lại số lượng tồn kho cho các cấu hình biến thể tương ứng của Laptop.</li>
+<li>Lấy thông tin chi tiết sản phẩm và ghi đè khôi phục lại Session giỏ hàng (<code class="inline-code">session()-&gt;put('cart', $cart)</code>) đúng như trước khi thanh toán.</li>
+<li>Thực hiện xóa dữ liệu chi tiết đơn hàng (<code class="inline-code">order_details</code>) và đơn hàng tạm (<code class="inline-code">orders</code>) khỏi Database để giải phóng dung lượng bộ nhớ.</li>
+<li>Trình duyệt đóng Modal và hiển thị lại giỏ hàng đầy đủ, tạo trải nghiệm mua sắm vô cùng mượt mà.</li>
+</ol>
+
+<h3>6.3. Hệ thống WebSockets và Trạng thái kết nối thời gian thực</h3>
+Hệ thống sử dụng server WebSockets nội bộ dựa trên thư viện <code class="inline-code">beyondcode/laravel-websockets</code> để truyền tải các sự kiện thời gian thực:
+<ul>
+<li><strong>Thông báo đơn hàng mới (Realtime Notification)</strong>: Khi khách hàng đặt hàng thành công qua sự kiện <code class="inline-code">OrderPlaced</code>, hoặc trạng thái đơn hàng thay đổi qua sự kiện <code class="inline-code">OrderStatusUpdated</code>, Backend sẽ phát đi tín hiệu đến kênh WebSocket.</li>
+<li>Ở phía giao diện quản trị (Admin), thư viện Laravel Echo sẽ lắng nghe sự kiện để lập tức hiển thị thông báo toast, hoặc tự động tải lại bảng đơn hàng để cập nhật trạng thái đơn mà không cần nhấn F5 thủ công.</li>
+<li><strong>Visual Connection Badge</strong>: Dưới Client UI, ở góc trái bên dưới màn hình, hệ thống thiết kế một thẻ hiển thị trạng thái kết nối WebSockets trực quan (Connected / Connecting / Disconnected) tự động thay đổi màu sắc (Xanh / Vàng / Đỏ) tương ứng với trạng thái kết nối từ thư viện Pusher, tăng độ tin cậy và tính thẩm mỹ cho website.</li>
+</ul>
+
+<hr/>
+
+<h2>7. HƯỚNG DẪN CÀI ĐẶT VÀ CẤU HÌNH</h2>
+
+<h3>7.1. Yêu cầu hệ thống</h3>
+<ul>
+<li>Máy chủ cài đặt: XAMPP, Laragon hoặc Docker (chạy PHP từ 7.3 trở lên, khuyến nghị PHP 8.0).</li>
+<li>Hệ quản trị cơ sở dữ liệu: MySQL v5.7 trở lên.</li>
+<li>Quản lý thư viện PHP: Composer.</li>
+</ul>
+
+<h3>7.2. Các bước triển khai</h3>
+
+<p><strong>Bước 1: Tải mã nguồn và cài đặt thư viện</strong></p>
+
+
+<pre class='code-block'><b>[bash]</b>
+<h1>Di chuyển vào thư mục dự án</h1>
+cd c:\xampp\htdocs\doan2026
+
+<h1>Cài đặt các thư viện PHP phụ thuộc qua Composer</h1>
+composer install</pre>
+
+
+
+<p><strong>Bước 2: Cấu hình môi trường</strong><br />
+Sao chép tệp tin cấu hình môi trường <code class="inline-code">.env.example</code> thành <code class="inline-code">.env</code> và thiết lập các thông số cơ sở dữ liệu và Pusher:</p>
+
+
+<pre class='code-block'><b>[env]</b>
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=doan2026
+DB_USERNAME=root
+DB_PASSWORD=
+
+<p>BROADCAST_DRIVER=pusher</p>
+
+<p>PUSHER_APP_ID=local-app-id<br />
+PUSHER_APP_KEY=local-app-key<br />
+PUSHER_APP_SECRET=local-app-secret<br />
+PUSHER_APP_CLUSTER=mt1</pre></p>
+
+
+
+<p><strong>Bước 3: Tạo khóa ứng dụng và di cư dữ liệu (Migration)</strong></p>
+
+
+<pre class='code-block'><b>[bash]</b>
+<h1>Tạo Application Key</h1>
+php artisan key:generate
+
+<h1>Chạy di cư dữ liệu để khởi tạo cấu trúc các bảng DB</h1>
+php artisan migrate</pre>
+
+
+
+<p><strong>Bước 4: Khởi chạy các dịch vụ máy chủ</strong><br />
+Hệ thống yêu cầu chạy song song 2 dịch vụ máy chủ:<br />
+<ol><br />
+<li>Máy chủ Web Laravel:</li><br />
+</ol><br />
+   <code class="inline-code"></code>`bash<br />
+   php artisan serve<br />
+   <code class="inline-code"></code>`<br />
+<ol><br />
+<li>Máy chủ WebSockets riêng biệt để truyền tải thông báo thời gian thực:</li><br />
+</ol><br />
+   <code class="inline-code"></code>`bash<br />
+   php artisan websockets:serve<br />
+   <code class="inline-code"></code>`</p>
+
+<hr/>
+
+<h2>8. KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN</h2>
+
+<h3>8.1. Kết quả đạt được</h3>
+<ul>
+<li>Xây dựng thành công Website thương mại điện tử chuyên Laptop SPATACUS với đầy đủ các nghiệp vụ bán hàng, quản lý kho hàng và đơn hàng khoa học.</li>
+<li>Triển khai thành công tính năng đột phá: <strong>Thanh toán VietQR động tự động nhận dạng trạng thái thời gian thực thông qua Long-Polling</strong>, mang lại trải nghiệm mua sắm tiện lợi và an toàn tuyệt đối cho người dùng.</li>
+<li>Tích hợp thành công <strong>hệ thống thông báo đẩy WebSockets</strong> độc lập cho trang quản trị Admin giúp nhận biết đơn hàng mới ngay lập tức.</li>
+<li>Giao diện người dùng hiện đại, sử dụng TailwindCSS mượt mà, hỗ trợ tìm kiếm gợi ý tức thời và in xuất báo giá quy đổi tiền tệ ra chữ tiếng Việt chuẩn xác.</li>
+</ul>
+
+<h3>8.2. Hạn chế và hướng phát triển tương lai</h3>
+<ul>
+<li><strong>Hạn chế:</strong> Hệ thống Long-Polling mặc dù hoạt động ổn định và dễ cấu hình, nhưng nếu số lượng khách truy cập cùng lúc quá lớn (hàng triệu người dùng) có thể gây tải cho máy xuất MySQL do số lượng request kiểm tra trạng thái liên tục.</li>
+<li><strong>Hướng phát triển:</strong></li>
+<li>Nâng cấp cơ chế Long-Polling sang lắng nghe trực tiếp sự kiện thanh toán từ WebSockets ngân hàng (Webhook của các bên trung gian PayOS, Casso...) để tối ưu hóa hiệu năng máy chủ.</li>
+<li>Tích hợp hệ thống gợi ý sản phẩm thông minh sử dụng học máy (AI Recommendation System) phân tích dựa trên lịch sử xem hàng của người dùng.</li>
+<li>Phát triển ứng dụng di động (Mobile App) đồng bộ hóa cơ sở dữ liệu để nâng cao trải nghiệm đa kênh.</li>
+</ul>
+
+</body>
+</html>

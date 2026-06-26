@@ -92,6 +92,12 @@
               <span class="menu-title">Quản lý Đơn hàng</span>
             </a>
           </li>
+          <li class="nav-item {{ request()->routeIs('admin.comments.table') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('admin.comments.table') }}">
+              <i class="typcn typcn-message menu-icon"></i>
+              <span class="menu-title">Quản lý Bình luận</span>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#icons" aria-expanded="false" aria-controls="icons">
               <i class="typcn typcn-compass menu-icon"></i>

@@ -90,11 +90,219 @@ class Homecontroller extends Controller
             ->limit(5)
             ->get();
 
-        return view('product-detail', compact('product', 'images', 'variants', 'relatedProducts'));
+        // Tải danh sách bình luận (có join với bảng users để hiển thị tên người dùng)
+        $comments = \Illuminate\Support\Facades\DB::table('comments')
+            ->join('users', 'comments.user_id', '=', 'users.id')
+            ->where('comments.product_id', $id)
+            ->select('comments.*', 'users.name as user_name', 'users.email as user_email')
+            ->orderBy('comments.created_at', 'desc')
+            ->get();
+
+        $commentsCount = $comments->count();
+        $averageRating = $commentsCount > 0 ? round($comments->avg('rating'), 1) : 5.0;
+
+        // Tính toán phân bổ tỷ lệ các số sao (5 sao, 4 sao, v.v.)
+        $ratingDistribution = [5 => 0, 4 => 0, 3 => 0, 2 => 0, 1 => 0];
+        if ($commentsCount > 0) {
+            foreach ($comments as $comment) {
+                $ratingVal = (int)$comment->rating;
+                if ($ratingVal >= 1 && $ratingVal <= 5) {
+                    $ratingDistribution[$ratingVal]++;
+                }
+            }
+        }
+
+        return view('product-detail', compact(
+            'product', 
+            'images', 
+            'variants', 
+            'relatedProducts', 
+            'comments', 
+            'commentsCount', 
+            'averageRating', 
+            'ratingDistribution'
+        ));
     }
 
-    public function category(){
-        return view('category');
+    /**
+     * Thêm bình luận/đánh giá cho sản phẩm
+     */
+    public function addComment(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'content' => 'required|string|min:3',
+            'rating' => 'required|integer|min:1|max:5',
+        ], [
+            'content.required' => 'Vui lòng nhập nội dung bình luận.',
+            'content.min' => 'Nội dung bình luận phải có ít nhất 3 ký tự.',
+            'rating.required' => 'Vui lòng chọn số sao đánh giá.',
+            'rating.integer' => 'Điểm đánh giá phải là số nguyên.',
+            'rating.min' => 'Đánh giá tối thiểu là 1 sao.',
+            'rating.max' => 'Đánh giá tối đa là 5 sao.',
+        ]);
+
+        $product = \Illuminate\Support\Facades\DB::table('products')->where('id', $id)->first();
+        if (!$product) {
+            return back()->with('error', 'Sản phẩm không tồn tại!');
+        }
+
+        \Illuminate\Support\Facades\DB::table('comments')->insert([
+            'product_id' => $id,
+            'user_id' => \Illuminate\Support\Facades\Auth::id(),
+            'content' => $validated['content'],
+            'rating' => $validated['rating'],
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return back()->with('success', 'Cảm ơn bạn đã gửi đánh giá & bình luận cho sản phẩm!');
+    }
+
+    public function category(Request $request)
+    {
+        $type = $request->query('type', '');
+        
+        // Mapping type string to category ID
+        $categoryId = null;
+        $categoryName = 'Laptop Chính Hãng';
+        
+        if ($type === 'gaming') {
+            $categoryId = 1;
+            $categoryName = 'Laptop Gaming';
+        } elseif ($type === 'van-phong') {
+            $categoryId = 2;
+            $categoryName = 'Laptop Văn Phòng';
+        } elseif ($type === 'do-hoa') {
+            $categoryId = 3;
+            $categoryName = 'Laptop Đồ Họa';
+        } elseif ($type === 'macbook') {
+            $categoryId = 4;
+            $categoryName = 'MacBook & Surface';
+        } elseif ($type === 'sinh-vien') {
+            $categoryId = 5;
+            $categoryName = 'Laptop Sinh Viên';
+        } elseif ($type === 'phu-kien') {
+            $categoryId = 6;
+            $categoryName = 'Phụ kiện Laptop';
+        }
+
+        $query = \Illuminate\Support\Facades\DB::table('products')
+            ->leftJoin('product_variants', function($join) {
+                $join->on('products.id', '=', 'product_variants.product_id')
+                     ->whereRaw('product_variants.id = (SELECT MIN(id) FROM product_variants WHERE product_id = products.id)');
+            });
+
+        if ($categoryId) {
+            $query->where('products.category_id', $categoryId);
+        }
+
+        // Apply filters from request
+        
+        // Brand Filter (using subquery check on product name)
+        $selectedBrands = $request->query('brands', []);
+        if (!empty($selectedBrands)) {
+            $query->where(function($subQuery) use ($selectedBrands) {
+                foreach ($selectedBrands as $brand) {
+                    $subQuery->orWhere('products.name', 'like', '%' . $brand . '%');
+                }
+            });
+        }
+
+        // CPU Filter
+        $selectedCpus = $request->query('cpus', []);
+        if (!empty($selectedCpus)) {
+            $query->where(function($subQuery) use ($selectedCpus) {
+                foreach ($selectedCpus as $cpu) {
+                    $subQuery->orWhere('product_variants.cpu', 'like', '%' . $cpu . '%');
+                }
+            });
+        }
+
+        // RAM Filter
+        $selectedRams = $request->query('rams', []);
+        if (!empty($selectedRams)) {
+            $query->where(function($subQuery) use ($selectedRams) {
+                foreach ($selectedRams as $ram) {
+                    $subQuery->orWhere('product_variants.ram', 'like', '%' . $ram . '%');
+                }
+            });
+        }
+
+        // Price Filter
+        $selectedPrices = $request->query('price_ranges', []);
+        if (!empty($selectedPrices)) {
+            $query->where(function($subQuery) use ($selectedPrices) {
+                foreach ($selectedPrices as $range) {
+                    $parts = explode('-', $range);
+                    if (count($parts) === 2) {
+                        $min = floatval($parts[0]) * 1000000;
+                        $max = floatval($parts[1]) * 1000000;
+                        $subQuery->orWhereBetween('products.price', [$min, $max]);
+                    } elseif (strpos($range, 'above-') === 0) {
+                        $min = floatval(substr($range, 6)) * 1000000;
+                        $subQuery->orWhere('products.price', '>=', $min);
+                    }
+                }
+            });
+        }
+
+        // Sorting
+        $sort = $request->query('sort', '');
+        if ($sort === 'price-asc') {
+            $query->orderBy('products.price', 'asc');
+        } elseif ($sort === 'price-desc') {
+            $query->orderBy('products.price', 'desc');
+        } elseif ($sort === 'name-asc') {
+            $query->orderBy('products.name', 'asc');
+        } else {
+            $query->orderBy('products.created_at', 'desc');
+        }
+
+        $products = $query->select('products.*', 'product_variants.cpu', 'product_variants.ram', 'product_variants.storage', 'product_variants.color', 'product_variants.sku')
+            ->paginate(12)
+            ->withQueryString();
+
+        // Calculate dynamic filter counts for the sidebar (based on current category)
+        $baseQuery = \Illuminate\Support\Facades\DB::table('products')
+            ->leftJoin('product_variants', function($join) {
+                $join->on('products.id', '=', 'product_variants.product_id')
+                     ->whereRaw('product_variants.id = (SELECT MIN(id) FROM product_variants WHERE product_id = products.id)');
+            });
+        if ($categoryId) {
+            $baseQuery->where('products.category_id', $categoryId);
+        }
+        
+        $brandList = ['ASUS', 'Lenovo', 'Dell', 'HP', 'Acer', 'Apple', 'Gigabyte', 'MSI'];
+        $brandCounts = [];
+        foreach ($brandList as $brand) {
+            $brandCounts[$brand] = (clone $baseQuery)->where('products.name', 'like', '%' . $brand . '%')->count();
+        }
+
+        $cpuList = ['i3', 'i5', 'i7', 'i9', 'Ryzen 5', 'Ryzen 7', 'Ryzen 9', 'Ultra 5', 'Ultra 7', 'Ultra 9', 'M-Series', 'M3'];
+        $cpuCounts = [];
+        foreach ($cpuList as $cpu) {
+            $cpuCounts[$cpu] = (clone $baseQuery)->where('product_variants.cpu', 'like', '%' . $cpu . '%')->count();
+        }
+
+        $ramList = ['8GB', '16GB', '32GB'];
+        $ramCounts = [];
+        foreach ($ramList as $ram) {
+            $ramCounts[$ram] = (clone $baseQuery)->where('product_variants.ram', 'like', '%' . $ram . '%')->count();
+        }
+
+        return view('category', compact(
+            'products', 
+            'type', 
+            'categoryName',
+            'brandCounts',
+            'cpuCounts',
+            'ramCounts',
+            'selectedBrands',
+            'selectedCpus',
+            'selectedRams',
+            'selectedPrices',
+            'sort'
+        ));
     }
 
     public function search(Request $request)
@@ -119,23 +327,29 @@ class Homecontroller extends Controller
 
         if (!empty($selectedCategory)) {
             if ($selectedCategory === 'gaming') {
-                $query->where('products.name', 'like', '%gaming%');
+                $query->where(function($subQuery) {
+                    $subQuery->where('products.category_id', 1)
+                             ->orWhere('products.name', 'like', '%gaming%');
+                });
             } elseif ($selectedCategory === 'van-phong') {
                 $query->where(function($subQuery) {
-                    $subQuery->where('products.name', 'like', '%modern%')
+                    $subQuery->where('products.category_id', 2)
+                             ->orWhere('products.name', 'like', '%modern%')
                              ->orWhere('products.name', 'like', '%thin%')
                              ->orWhere('products.name', 'like', '%thinkpad%')
                              ->orWhere('products.name', 'like', '%air%');
                 });
             } elseif ($selectedCategory === 'macbook') {
                 $query->where(function($subQuery) {
-                    $subQuery->where('products.name', 'like', '%macbook%')
+                    $subQuery->where('products.category_id', 4)
+                             ->orWhere('products.name', 'like', '%macbook%')
                              ->orWhere('products.name', 'like', '%air%')
                              ->orWhere('products.name', 'like', '%apple%');
                 });
             } elseif ($selectedCategory === 'do-hoa') {
                 $query->where(function($subQuery) {
-                    $subQuery->where('products.name', 'like', '%pro%')
+                    $subQuery->where('products.category_id', 3)
+                             ->orWhere('products.name', 'like', '%pro%')
                              ->orWhere('products.name', 'like', '%legion%')
                              ->orWhere('products.name', 'like', '%zenbook%')
                              ->orWhere('products.name', 'like', '%strix%');
@@ -504,7 +718,7 @@ class Homecontroller extends Controller
 
         if (\Illuminate\Support\Facades\Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
-            return redirect()->intended('index')->with('success', 'Đăng nhập thành công! Chào mừng bạn trở lại.');
+            return redirect()->intended()->with('success', 'Đăng nhập thành công! Chào mừng bạn trở lại.');
         }
 
         return back()->withErrors([
@@ -548,7 +762,7 @@ class Homecontroller extends Controller
 
         \Illuminate\Support\Facades\Auth::login($user);
 
-        return redirect('index')->with('success', 'Đăng ký tài khoản thành công! Chào mừng bạn đến với SPATACUS.');
+        return redirect()->intended()->with('success', 'Đăng ký tài khoản thành công! Chào mừng bạn đến với SPATACUS.');
     }
 
     /**
@@ -561,7 +775,7 @@ class Homecontroller extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('index')->with('success', 'Đã đăng xuất tài khoản thành công.');
+        return redirect()->intended()->with('success', 'Đã đăng xuất tài khoản thành công.');
     }
 
     /**

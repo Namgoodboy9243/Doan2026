@@ -14,10 +14,8 @@ use App\Http\Controllers\Admincontroller;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-route::get('index',[Homecontroller::class, 'index']);
+
+route::get('/',[Homecontroller::class, 'index'])->name('home');
 route::get('category',[Homecontroller::class, 'category']);
 route::get('search',[Homecontroller::class, 'search'])->name('search');
 route::get('search/suggestions',[Homecontroller::class, 'suggestions'])->name('search.suggestions');
@@ -39,6 +37,7 @@ Route::middleware(['auth.buy'])->group(function () {
     Route::get('checkout/check-status/{id}', [Homecontroller::class, 'checkOrderStatus'])->name('checkout.check_status');
     Route::get('checkout/simulate-payment/{id}', [Homecontroller::class, 'simulatePayment'])->name('checkout.simulate_payment');
     Route::get('checkout/cancel-order/{id}', [Homecontroller::class, 'cancelQROrder'])->name('checkout.cancel_order');
+    Route::post('product/{id}/comment', [Homecontroller::class, 'addComment'])->name('product.comment.add');
 });
 
 // Các route Xác thực tài khoản dành cho Khách vãng lai
@@ -83,6 +82,13 @@ Route::middleware(['admin.auth'])->group(function () {
     Route::get('admin/orders', [Admincontroller::class, 'orders_table'])->name('admin.orders.table');
     Route::post('admin/orders/update-status/{id}', [Admincontroller::class, 'update_order_status'])->name('admin.orders.update_status');
     Route::get('admin/orders/detail/{id}', [Admincontroller::class, 'order_detail_json'])->name('admin.orders.detail');
+    
+    // API thống kê số liệu Dashboard Admin
+    Route::get('admin/api/dashboard-stats', [Admincontroller::class, 'getDashboardStatsApi'])->name('admin.api.dashboard_stats');
+
+    // Admin Comment Management Routes
+    Route::get('admin/comments', [Admincontroller::class, 'comments_table'])->name('admin.comments.table');
+    Route::get('admin/comments/delete/{id}', [Admincontroller::class, 'delete_comment'])->name('admin.comments.delete');
 });
 
 // Route test WebSocket độc lập

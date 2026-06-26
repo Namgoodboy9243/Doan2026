@@ -48,15 +48,19 @@
         <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ $product->name }}</h1>
         
         <div class="flex items-center gap-4 text-xs font-semibold text-gray-500 mb-4 pb-4 border-b border-gray-100">
-            <div class="flex text-yellow-400">
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
-                <i class="fas fa-star"></i>
+            <div class="flex text-yellow-400 gap-0.5">
+                @for($i = 1; $i <= 5; $i++)
+                    @if($i <= floor($averageRating))
+                        <i class="fas fa-star"></i>
+                    @elseif($i - $averageRating < 1 && $i - $averageRating > 0)
+                        <i class="fas fa-star-half-alt"></i>
+                    @else
+                        <i class="far fa-star text-gray-300"></i>
+                    @endif
+                @endfor
             </div>
             <span>|</span>
-            <span class="text-gray-700">5.0 (Đánh giá tốt)</span>
+            <span class="text-gray-700 font-bold">{{ number_format($averageRating, 1) }} ({{ $commentsCount }} đánh giá)</span>
             <span>|</span>
             <span id="stock-badge" class="text-green-600 bg-green-50 border border-green-100 px-2 py-0.5 rounded font-bold">Còn hàng</span>
         </div>
@@ -267,6 +271,138 @@
     </div>
 @endif
 
+<!-- Đánh giá & Bình luận sản phẩm -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-8">
+    <div class="border-b border-gray-200 pb-3 mb-5">
+        <h2 class="text-sm font-black text-gray-900 uppercase tracking-wider border-b-2 border-primary pb-3 inline-block">Đánh giá & Bình luận từ khách hàng</h2>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-8">
+        <!-- Review Summary -->
+        <div class="lg:col-span-4 bg-gray-50/50 p-6 rounded-xl border border-gray-100 text-center flex flex-col justify-center items-center">
+            <h3 class="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">Đánh giá trung bình</h3>
+            <span class="text-5xl font-black text-gray-900 leading-none mb-2">{{ number_format($averageRating, 1) }}</span>
+            <div class="flex text-yellow-400 text-lg mb-2 gap-0.5">
+                @for($i = 1; $i <= 5; $i++)
+                    @if($i <= floor($averageRating))
+                        <i class="fas fa-star"></i>
+                    @elseif($i - $averageRating < 1 && $i - $averageRating > 0)
+                        <i class="fas fa-star-half-alt"></i>
+                    @else
+                        <i class="far fa-star text-gray-300"></i>
+                    @endif
+                @endfor
+            </div>
+            <p class="text-xs text-gray-500 font-medium mb-6">({{ $commentsCount }} lượt đánh giá thực tế)</p>
+
+            <!-- Star progress bars -->
+            <div class="w-full space-y-2 text-xs font-semibold text-gray-600">
+                @for($star = 5; $star >= 1; $star--)
+                    @php
+                        $count = $ratingDistribution[$star] ?? 0;
+                        $pct = $commentsCount > 0 ? round(($count / $commentsCount) * 100) : 0;
+                    @endphp
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 text-right">{{ $star }}</span>
+                        <i class="fas fa-star text-yellow-400 text-[10px]"></i>
+                        <div class="flex-grow bg-gray-200 rounded-full h-2 overflow-hidden">
+                            <div class="bg-primary h-full rounded-full transition-all duration-500" style="width: {{ $pct }}%"></div>
+                        </div>
+                        <span class="w-8 text-right text-gray-400 font-bold">{{ $pct }}%</span>
+                    </div>
+                @endfor
+            </div>
+        </div>
+
+        <!-- Comments List -->
+        <div class="lg:col-span-8 flex flex-col">
+            <h3 class="text-sm font-bold text-gray-900 mb-4 flex items-center">
+                <i class="far fa-comments text-primary mr-2 text-base"></i> Khách hàng nói gì về sản phẩm này?
+            </h3>
+            
+            <div class="space-y-4 max-h-[420px] overflow-y-auto pr-2 scrollbar-thin">
+                @forelse($comments as $comment)
+                    <div class="bg-white border border-gray-100 p-4 rounded-xl shadow-sm hover:shadow transition duration-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="flex items-center gap-3">
+                                @php
+                                    $initial = strtoupper(substr($comment->user_name, 0, 1));
+                                    $bgColors = ['bg-orange-500', 'bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-pink-500', 'bg-indigo-500'];
+                                    $avatarBg = $bgColors[ord($initial) % count($bgColors)];
+                                @endphp
+                                <div class="{{ $avatarBg }} text-white text-xs font-black rounded-full w-8 h-8 flex items-center justify-center shadow-inner">
+                                    {{ $initial }}
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-gray-800">{{ $comment->user_name }}</h4>
+                                    <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-0.5">
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $comment->rating)
+                                                <i class="fas fa-star"></i>
+                                            @else
+                                                <i class="far fa-star text-gray-200"></i>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                </div>
+                            </div>
+                            <span class="text-[10px] text-gray-400 font-semibold">
+                                {{ date('d/m/Y H:i', strtotime($comment->created_at)) }}
+                            </span>
+                        </div>
+                        <p class="text-xs text-gray-600 leading-relaxed pl-11">{{ $comment->content }}</p>
+                    </div>
+                @empty
+                    <div class="text-center py-12 bg-gray-50/50 rounded-xl border border-dashed border-gray-200 text-gray-400 font-bold">
+                        <i class="far fa-comment-dots text-gray-300 text-3xl mb-2 block"></i>
+                        Chưa có đánh giá nào cho sản phẩm này. Hãy là người đầu tiên đánh giá!
+                    </div>
+                @endforelse
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Form -->
+    <div class="mt-6 pt-6 border-t border-gray-100">
+        @auth
+            <h3 class="text-sm font-bold text-gray-900 mb-4 flex items-center">
+                <i class="fas fa-pen-fancy text-primary mr-2"></i> Viết đánh giá của bạn
+            </h3>
+
+            <form action="{{ route('product.comment.add', $product->id) }}" method="POST" class="space-y-4">
+                @csrf
+                <div class="flex items-center gap-4">
+                    <span class="text-xs font-bold text-gray-600">Chọn số sao đánh giá:</span>
+                    <div class="flex gap-1 star-rating-selector text-gray-300 text-xl cursor-pointer">
+                        <i class="fas fa-star hover:text-yellow-400 transition" data-value="1"></i>
+                        <i class="fas fa-star hover:text-yellow-400 transition" data-value="2"></i>
+                        <i class="fas fa-star hover:text-yellow-400 transition" data-value="3"></i>
+                        <i class="fas fa-star hover:text-yellow-400 transition" data-value="4"></i>
+                        <i class="fas fa-star hover:text-yellow-400 transition" data-value="5"></i>
+                    </div>
+                    <input type="hidden" name="rating" id="rating-input" value="5">
+                    <span id="rating-text" class="text-xs text-yellow-600 font-bold bg-yellow-50 px-2.5 py-0.5 rounded border border-yellow-100">5 sao - Rất hài lòng</span>
+                </div>
+
+                <div class="relative">
+                    <textarea name="content" rows="3" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm này (cấu hình, hiệu năng, đóng gói, giao hàng...)..." class="w-full text-xs text-gray-800 placeholder-gray-400 border border-gray-200 focus:border-primary focus:ring-1 focus:ring-primary rounded-xl p-4 pr-12 focus:outline-none transition" required></textarea>
+                    <button type="submit" class="absolute bottom-3 right-3 bg-primary text-white font-bold text-xs px-4 py-2 rounded-lg shadow hover:bg-orange-600 transition flex items-center gap-1.5">
+                        <i class="fas fa-paper-plane"></i> GỬI ĐÁNH GIÁ
+                    </button>
+                </div>
+            </form>
+        @else
+            <div class="bg-orange-50/20 border border-orange-100 p-5 rounded-xl text-center">
+                <i class="fas fa-user-lock text-orange-400 text-2xl mb-2 block"></i>
+                <p class="text-xs text-gray-600 font-bold mb-3">Vui lòng đăng nhập để gửi đánh giá và nhận xét của bạn về sản phẩm này!</p>
+                <a href="{{ route('login') }}" class="inline-flex items-center justify-center bg-primary hover:bg-orange-600 text-white font-bold text-xs px-5 py-2.5 rounded-lg shadow transition">
+                    <i class="fas fa-sign-in-alt mr-1.5"></i> ĐĂNG NHẬP NGAY
+                </a>
+            </div>
+        @endauth
+    </div>
+</div>
+
 <!-- Dynamic Scripts -->
 <script>
     // Embed variants JSON safely
@@ -410,5 +546,55 @@
                 buttonElement.innerHTML = originalContent;
             }
         });
+    }
+
+    // Handle Interactive Star Rating Form
+    const stars = document.querySelectorAll('.star-rating-selector i');
+    const ratingInput = document.getElementById('rating-input');
+    const ratingText = document.getElementById('rating-text');
+    const starTexts = {
+        1: '1 sao - Rất tệ',
+        2: '2 sao - Tệ',
+        3: '3 sao - Bình thường',
+        4: '4 sao - Tốt',
+        5: '5 sao - Rất hài lòng'
+    };
+
+    if (stars.length > 0 && ratingInput) {
+        function highlightStars(count) {
+            stars.forEach((star, idx) => {
+                if (idx < count) {
+                    star.classList.remove('text-gray-300');
+                    star.classList.add('text-yellow-400');
+                } else {
+                    star.classList.remove('text-yellow-400');
+                    star.classList.add('text-gray-300');
+                }
+            });
+        }
+
+        highlightStars(5);
+
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                const val = parseInt(this.getAttribute('data-value'));
+                ratingInput.value = val;
+                highlightStars(val);
+                ratingText.innerText = starTexts[val];
+            });
+
+            star.addEventListener('mouseenter', function() {
+                const val = parseInt(this.getAttribute('data-value'));
+                highlightStars(val);
+            });
+        });
+
+        const selectorContainer = document.querySelector('.star-rating-selector');
+        if (selectorContainer) {
+            selectorContainer.addEventListener('mouseleave', function() {
+                const currentVal = parseInt(ratingInput.value);
+                highlightStars(currentVal);
+            });
+        }
     }
 </script>

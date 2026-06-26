@@ -1,528 +1,173 @@
 @extends('admin.layout.master')
 
 @section('content')
-          <div class="row">
-            <div class="col-sm-6">
-              <h3 class="mb-0 font-weight-bold">Kenneth Osborne</h3>
-              <p>Your last login: 21h ago from newzealand.</p>
+          <!-- Tiêu đề chào mừng Admin -->
+          <div class="row mb-4">
+            <div class="col-sm-8">
+              <h3 class="mb-1 font-weight-bold text-dark" style="font-family: 'Segoe UI', sans-serif;">Xin chào, {{ auth()->user()->name }}!</h3>
+              <p class="text-muted mb-0">Hệ thống đang hoạt động ổn định. Số liệu thống kê được đồng bộ thời gian thực.</p>
             </div>
-            <div class="col-sm-6">
-              <div class="d-flex align-items-center justify-content-md-end">
-                <div class="mb-3 mb-xl-0 pr-1">
-                  <div class="dropdown">
-                    <button class="btn bg-white btn-sm dropdown-toggle btn-icon-text border mr-2" type="button"
-                      id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="typcn typcn-calendar-outline mr-2"></i>Last 7 days
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton3" data-x-placement="top-start">
-                      <h6 class="dropdown-header">Last 14 days</h6>
-                      <a class="dropdown-item" href="#">Last 21 days</a>
-                      <a class="dropdown-item" href="#">Last 28 days</a>
-                    </div>
-                  </div>
-                </div>
-                <div class="pr-1 mb-3 mr-2 mb-xl-0">
-                  <button type="button" class="btn btn-sm bg-white btn-icon-text border"><i
-                      class="typcn typcn-arrow-forward-outline mr-2"></i>Export</button>
-                </div>
-                <div class="pr-1 mb-3 mb-xl-0">
-                  <button type="button" class="btn btn-sm bg-white btn-icon-text border"><i
-                      class="typcn typcn-info-large-outline mr-2"></i>info</button>
-                </div>
+            <div class="col-sm-4 text-sm-right mt-2 mt-sm-0">
+              <div class="badge badge-outline-secondary px-3 py-2 font-weight-semibold" style="border-radius: 20px; font-size: 11px;">
+                <i class="typcn typcn-calendar-outline mr-1"></i> Hôm nay: {{ date('d/m/Y') }}
               </div>
             </div>
           </div>
-          <div class="row  mt-3">
-            <div class="col-xl-5 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Sessions by Channel</h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-lg-6">
-                          <div id="circleProgress6" class="progressbar-js-circle rounded p-3"></div>
-                        </div>
-                        <div class="col-lg-6">
-                          <ul class="session-by-channel-legend">
-                            <li>
-                              <div>Firewalls(3)</div>
-                              <div>4(100%)</div>
-                            </li>
-                            <li>
-                              <div>Ports(12)</div>
-                              <div>12(100%)</div>
-                            </li>
-                            <li>
-                              <div>Servers(233)</div>
-                              <div>2(100%)</div>
-                            </li>
-                            <li>
-                              <div>Firewalls(3)</div>
-                              <div>7(100%)</div>
-                            </li>
-                            <li>
-                              <div>Firewalls(3)</div>
-                              <div>6(70%)</div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
+
+          <!-- Hệ thống 3 thẻ thống kê (Real-time Metrics Cards) -->
+          <div class="row mb-3">
+            <!-- Thẻ 1: Tổng tồn kho -->
+            <div class="col-xl-4 col-md-6 grid-margin stretch-card">
+              <div class="card shadow-sm border-0" style="background: linear-gradient(135deg, #051923 0%, #17374a 100%); border-radius: 12px; min-height: 120px;">
+                <div class="card-body text-white">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-white-50 mb-1 font-weight-bold" style="font-size: 10px; letter-spacing: 1px; text-transform: uppercase;">Laptop trong kho</p>
+                      <h2 class="mb-0 font-weight-bold text-white" id="stat-total-stock" style="font-size: 28px;">{{ number_format($stats['total_stock'], 0, ',', '.') }}</h2>
+                      <small class="text-white-50" style="font-size: 11px;">Tổng số máy của tất cả biến thể</small>
+                    </div>
+                    <div class="p-3 rounded" style="background: rgba(255,255,255,0.12); border-radius: 10px;">
+                      <i class="typcn typcn-archive text-white" style="font-size: 32px; line-height: 1;"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-3 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Events</h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="d-flex justify-content-between mb-md-5 mt-3">
-                            <div class="small">Critical</div>
-                            <div class="text-danger small">Error</div>
-                            <div class="text-warning small">Warning</div>
-                          </div>
-                          <canvas id="eventChart"></canvas>
-                        </div>
-                      </div>
+
+            <!-- Thẻ 2: Sản phẩm đã bán trong tháng -->
+            <div class="col-xl-4 col-md-6 grid-margin stretch-card">
+              <div class="card shadow-sm border-0" style="background: linear-gradient(135deg, #d35400 0%, #f39c12 100%); border-radius: 12px; min-height: 120px;">
+                <div class="card-body text-white">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-white-50 mb-1 font-weight-bold" style="font-size: 10px; letter-spacing: 1px; text-transform: uppercase;">Đã bán tháng này</p>
+                      <h2 class="mb-0 font-weight-bold text-white" id="stat-sold-this-month" style="font-size: 28px;">{{ number_format($stats['sold_this_month'], 0, ',', '.') }}</h2>
+                      <small class="text-white-50" style="font-size: 11px;">Đơn hàng Đang chuẩn bị / Đang giao / Đã giao</small>
+                    </div>
+                    <div class="p-3 rounded" style="background: rgba(255,255,255,0.12); border-radius: 10px;">
+                      <i class="typcn typcn-shopping-cart text-white" style="font-size: 32px; line-height: 1;"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-4 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Device stats</h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="d-flex justify-content-between mb-4">
-                            <div>Uptime</div>
-                            <div class="text-muted">195 Days, 8 hours</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div>First Seen</div>
-                            <div class="text-muted">23 Sep 2019, 2.04PM</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div>Collected time</div>
-                            <div class="text-muted">23 Sep 2019, 2.04PM</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div>Memory space</div>
-                            <div class="text-muted">168.3GB</div>
-                          </div>
-                          <div class="progress progress-md mt-4">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%"
-                              aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-                      </div>
+
+            <!-- Thẻ 3: Doanh thu của tháng -->
+            <div class="col-xl-4 col-md-12 grid-margin stretch-card">
+              <div class="card shadow-sm border-0" style="background: linear-gradient(135deg, #1b5e20 0%, #4caf50 100%); border-radius: 12px; min-height: 120px;">
+                <div class="card-body text-white">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                      <p class="text-white-50 mb-1 font-weight-bold" style="font-size: 10px; letter-spacing: 1px; text-transform: uppercase;">Doanh thu tháng này</p>
+                      <h2 class="mb-0 font-weight-bold text-white" id="stat-revenue-this-month" style="font-size: 26px;">{{ $stats['revenue_this_month_formatted'] }}</h2>
+                      <small class="text-white-50" style="font-size: 11px;">Đồng bộ với các cổng thanh toán</small>
+                    </div>
+                    <div class="p-3 rounded" style="background: rgba(255,255,255,0.12); border-radius: 10px;">
+                      <i class="typcn typcn-calculator text-white" style="font-size: 32px; line-height: 1;"></i>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-xl-3 d-flex grid-margin stretch-card">
-              <div class="card">
+
+          <!-- Biểu đồ phân tích Live so sánh 6 tháng gần nhất -->
+          <div class="row mb-4">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card shadow-sm border-0" style="border-radius: 12px;">
                 <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Sessions by Channel</h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="row">
-                        <div class="col-sm-12">
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="font-weight-medium">Empolyee Name</div>
-                            <div class="font-weight-medium">This Month</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Connor Chandler</div>
-                            <div class="small">$ 4909</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Russell Floyd</div>
-                            <div class="small">$857</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Douglas White</div>
-                            <div class="small">$612 </div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Alta Fletcher </div>
-                            <div class="small">$233</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Marguerite Pearson</div>
-                            <div class="small">$233</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Leonard Gutierrez</div>
-                            <div class="small">$35</div>
-                          </div>
-                          <div class="d-flex justify-content-between mb-4">
-                            <div class="text-secondary font-weight-medium">Helen Benson</div>
-                            <div class="small">$43</div>
-                          </div>
-                          <div class="d-flex justify-content-between">
-                            <div class="text-secondary font-weight-medium">Helen Benson</div>
-                            <div class="small">$43</div>
-                          </div>
-                        </div>
+                  <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+                    <div>
+                      <h4 class="card-title mb-1 font-weight-bold text-dark" style="font-size: 16px;">Phân Tích Hoạt Động Kinh Doanh</h4>
+                      <p class="text-muted mb-0" style="font-size: 12px;" id="chart-sub-title">Đang hiển thị so sánh 6 tháng gần nhất (Cập nhật Live ⚡)</p>
+                    </div>
+                    <div class="d-flex align-items-center mt-2 mt-md-0" style="gap: 10px;">
+                      <!-- Nhóm nút chuyển đổi chế độ xem -->
+                      <div class="btn-group" role="group" style="box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-radius: 8px; overflow: hidden; border: 1px solid #cbd5e1;">
+                        <button type="button" class="btn btn-sm btn-light font-weight-bold px-3 py-2" id="btn-view-month" onclick="switchChartView('current_month')" style="font-size: 11px; border: 0; outline: none;">Tháng này (Theo ngày)</button>
+                        <button type="button" class="btn btn-sm btn-dark font-weight-bold px-3 py-2" id="btn-view-six-months" onclick="switchChartView('six_months')" style="font-size: 11px; border: 0; outline: none;">6 tháng gần nhất</button>
+                      </div>
+                      <div class="badge badge-success px-3 py-2 font-weight-bold" style="font-size: 11px; border-radius: 20px; background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0;">
+                        <i class="fas fa-sync mr-1"></i> Tự động đồng bộ
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-6 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Sales Analytics</h4>
-                    <button type="button" class="btn btn-sm btn-light">Month</button>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="d-md-flex mb-4">
-                        <div class="mr-md-5 mb-4">
-                          <h5 class="mb-1"><i class="typcn typcn-globe-outline mr-1"></i>Online</h5>
-                          <h2 class="text-primary mb-1 font-weight-bold">23,342</h2>
-                        </div>
-                        <div class="mr-md-5 mb-4">
-                          <h5 class="mb-1"><i class="typcn typcn-archive mr-1"></i>Offline</h5>
-                          <h2 class="text-secondary mb-1 font-weight-bold">13,221</h2>
-                        </div>
-                        <div class="mr-md-5 mb-4">
-                          <h5 class="mb-1"><i class="typcn typcn-tags mr-1"></i>Marketing</h5>
-                          <h2 class="text-warning mb-1 font-weight-bold">1,542</h2>
-                        </div>
-                      </div>
-                      <canvas id="salesanalyticChart"></canvas>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Card Title</h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-12">
-                      <div class="mb-5">
-                        <div class="mr-1">
-                          <div class="text-info mb-1">
-                            Total Earning
-                          </div>
-                          <h2 class="mb-2 mt-2 font-weight-bold">287,493$</h2>
-                          <div class="font-weight-bold">
-                            1.4% Since Last Month
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="mr-1">
-                          <div class="text-info mb-1">
-                            Total Earning
-                          </div>
-                          <h2 class="mb-2 mt-2  font-weight-bold">87,493</h2>
-                          <div class="font-weight-bold">
-                            5.43% Since Last Month
-                          </div>
-                        </div>
-                      </div>
-                      <canvas id="barChartStacked"></canvas>
-                    </div>
+                  <div class="chart-container" style="position: relative; height: 350px; width: 100%;">
+                    <canvas id="adminLiveDashboardChart"></canvas>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <!-- Bảng đơn hàng gần đây -->
           <div class="row">
-            <div class="col-lg-12 d-flex grid-margin stretch-card">
-              <div class="card">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card shadow-sm border-0" style="border-radius: 12px;">
                 <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">E-Commerce Analytics</h4>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-9">
-                      <div class="d-sm-flex justify-content-between">
-                        <div class="dropdown">
-                          <button class="btn bg-white btn-sm dropdown-toggle btn-icon-text pl-0" type="button"
-                            id="dropdownMenuSizeButton4" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false">
-                            Mon,1 Oct 2019 - Tue,2 Oct 2019
-                          </button>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuSizeButton4"
-                            data-x-placement="top-start">
-                            <h6 class="dropdown-header">Mon,17 Oct 2019 - Tue,25 Oct 2019</h6>
-                            <a class="dropdown-item" href="#">Tue,18 Oct 2019 - Wed,26 Oct 2019</a>
-                            <a class="dropdown-item" href="#">Wed,19 Oct 2019 - Thu,26 Oct 2019</a>
-                          </div>
-                        </div>
-                        <div>
-                          <button type="button" class="btn btn-sm btn-light mr-2">Day</button>
-                          <button type="button" class="btn btn-sm btn-light mr-2">Week</button>
-                          <button type="button" class="btn btn-sm btn-light">Month</button>
-                        </div>
-                      </div>
-                      <div class="chart-container mt-4">
-                        <canvas id="ecommerceAnalytic"></canvas>
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="text-success font-weight-bold">Inbound</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">Current</div>
-                          <div class="text-muted">38.34M</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">Average</div>
-                          <div class="text-muted">38.34M</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">Maximum</div>
-                          <div class="text-muted">68.14M</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">60th %</div>
-                          <div class="text-muted">168.3GB</div>
-                        </div>
-                      </div>
-                      <hr>
-                      <div class="mt-4">
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="text-success font-weight-bold">Outbound</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">Current</div>
-                          <div class="text-muted">458.77M</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">Average</div>
-                          <div class="text-muted">1.45K</div>
-                        </div>
-                        <div class="d-flex justify-content-between mb-3">
-                          <div class="font-weight-medium">Maximum</div>
-                          <div class="text-muted">15.50K</div>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                          <div class="font-weight-medium">60th %</div>
-                          <div class="text-muted">45.5</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-4 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Sale Analysis Trend</h4>
-                  </div>
-                  <div class="mt-2">
-                    <div class="d-flex justify-content-between">
-                      <small>Order Value</small>
-                      <small>155.5%</small>
-                    </div>
-                    <div class="progress progress-md  mt-2">
-                      <div class="progress-bar bg-secondary" role="progressbar" style="width: 80%" aria-valuenow="90"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div class="mt-4">
-                    <div class="d-flex justify-content-between">
-                      <small>Total Products</small>
-                      <small>238.2%</small>
-                    </div>
-                    <div class="progress progress-md  mt-2">
-                      <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="90"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <div class="mt-4 mb-5">
-                    <div class="d-flex justify-content-between">
-                      <small>Quantity</small>
-                      <small>23.30%</small>
-                    </div>
-                    <div class="progress progress-md mt-2">
-                      <div class="progress-bar bg-warning" role="progressbar" style="width: 70%" aria-valuenow="90"
-                        aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                  </div>
-                  <canvas id="salesTopChart"></canvas>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-8 d-flex grid-margin stretch-card">
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-flex flex-wrap justify-content-between">
-                    <h4 class="card-title mb-3">Project status</h4>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="card-title mb-0 font-weight-bold text-dark" style="font-size: 16px;">Giao Dịch Gần Đây</h4>
+                    <a href="{{ route('admin.orders.table') }}" class="btn btn-sm btn-primary font-weight-bold" style="border-radius: 6px;">Xem tất cả đơn hàng</a>
                   </div>
                   <div class="table-responsive">
-                    <table class="table">
-                      <tbody>
+                    <table class="table table-hover align-middle">
+                      <thead class="table-light">
+                        <tr class="text-secondary" style="font-size: 12px; font-weight: bold;">
+                          <th>MÃ ĐƠN</th>
+                          <th>KHÁCH HÀNG</th>
+                          <th>SỐ ĐIỆN THOẠI</th>
+                          <th class="text-center">SỐ LƯỢNG</th>
+                          <th>TỔNG TIỀN</th>
+                          <th>TRẠNG THÁI</th>
+                          <th>NGÀY ĐẶT HÀNG</th>
+                          <th>HÀNH ĐỘNG</th>
+                        </tr>
+                      </thead>
+                      <tbody id="recent-orders-tbody">
+                        @forelse($stats['recent_orders'] as $order)
                         <tr>
+                          <td class="font-weight-bold text-primary">#{{ $order->id }}</td>
                           <td>
-                            <div class="d-flex">
-                              <img class="img-sm rounded-circle mb-md-0 mr-2" src="{{ asset('images/faces/face30.png') }}"
-                                alt="profile image">
+                            <div class="d-flex align-items-center">
+                              <div class="bg-light p-2 rounded-circle mr-2 text-secondary" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                                <i class="typcn typcn-user text-sm"></i>
+                              </div>
                               <div>
-                                <div> Company</div>
-                                <div class="font-weight-bold mt-1">volkswagen</div>
+                                <div class="font-weight-bold text-dark" style="font-size: 13px;">{{ $order->name }}</div>
+                                <small class="text-muted" style="font-size: 11px;">{{ $order->email ?: 'Không có email' }}</small>
                               </div>
                             </div>
                           </td>
+                          <td class="font-weight-medium text-secondary" style="font-size: 13px;">{{ $order->phone ?: 'N/A' }}</td>
+                          <td class="text-center font-weight-bold text-dark" style="font-size: 13px;">{{ $order->items_count }} SP</td>
+                          <td class="font-weight-bold" style="color: #1e3a8a; font-size: 13px;">{{ number_format($order->total_amount, 0, ',', '.') }} ₫</td>
                           <td>
-                            Budget
-                            <div class="font-weight-bold  mt-1">$2322 </div>
+                            @if($order->status == 1)
+                              <span class="badge font-weight-bold" style="background-color: #fef3c7; color: #d97706; border: 1px solid #fde68a;">⏳ Chờ xác nhận</span>
+                            @elseif($order->status == 5)
+                              <span class="badge font-weight-bold" style="background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;">💳 Chờ thanh toán QR</span>
+                            @elseif($order->status == 2)
+                              <span class="badge font-weight-bold" style="background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0;">📦 Đang chuẩn bị</span>
+                            @elseif($order->status == 3)
+                              <span class="badge font-weight-bold" style="background-color: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe;">🚚 Đang giao</span>
+                            @elseif($order->status == 4)
+                              <span class="badge font-weight-bold" style="background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0;">✅ Đã giao</span>
+                            @elseif($order->status == 0)
+                              <span class="badge font-weight-bold" style="background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;">❌ Đã hủy</span>
+                            @endif
                           </td>
+                          <td class="text-muted" style="font-size: 12px;">{{ date('H:i d/m/Y', strtotime($order->created_at)) }}</td>
                           <td>
-                            Status
-                            <div class="font-weight-bold text-success  mt-1">88% </div>
-                          </td>
-                          <td>
-                            Deadline
-                            <div class="font-weight-bold  mt-1">07 Nov 2019</div>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
+                            <a href="{{ route('admin.orders.table') }}?search={{ $order->id }}" class="btn btn-sm btn-light font-weight-bold text-primary border" style="border-radius: 6px;">
+                              <i class="typcn typcn-eye mr-1"></i> Chi tiết
+                            </a>
                           </td>
                         </tr>
+                        @empty
                         <tr>
-                          <td>
-                            <div class="d-flex">
-                              <img class="img-sm rounded-circle mb-md-0 mr-2" src="{{ asset('images/faces/face31.png') }}"
-                                alt="profile image">
-                              <div>
-                                <div> Company</div>
-                                <div class="font-weight-bold  mt-1">Land Rover</div>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Budget
-                            <div class="font-weight-bold  mt-1">$12022 </div>
-                          </td>
-                          <td>
-                            Status
-                            <div class="font-weight-bold text-success  mt-1">70% </div>
-                          </td>
-                          <td>
-                            Deadline
-                            <div class="font-weight-bold  mt-1">08 Nov 2019</div>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                          </td>
+                          <td colspan="8" class="text-center text-muted font-weight-bold py-4">Chưa có đơn hàng nào</td>
                         </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex">
-                              <img class="img-sm rounded-circle mb-md-0 mr-2" src="{{ asset('images/faces/face32.png') }}"
-                                alt="profile image">
-                              <div>
-                                <div> Company</div>
-                                <div class="font-weight-bold  mt-1">Bentley </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Budget
-                            <div class="font-weight-bold  mt-1">$8,725</div>
-                          </td>
-                          <td>
-                            Status
-                            <div class="font-weight-bold text-success  mt-1">87% </div>
-                          </td>
-                          <td>
-                            Deadline
-                            <div class="font-weight-bold  mt-1">11 Jun 2019</div>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex">
-                              <img class="img-sm rounded-circle mb-md-0 mr-2" src="{{ asset('images/faces/face33.png') }}"
-                                alt="profile image">
-                              <div>
-                                <div> Company</div>
-                                <div class="font-weight-bold  mt-1">Morgan </div>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Budget
-                            <div class="font-weight-bold  mt-1">$5,220 </div>
-                          </td>
-                          <td>
-                            Status
-                            <div class="font-weight-bold text-success  mt-1">65% </div>
-                          </td>
-                          <td>
-                            Deadline
-                            <div class="font-weight-bold  mt-1">26 Oct 2019</div>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>
-                            <div class="d-flex">
-                              <img class="img-sm rounded-circle mb-md-0 mr-2" src="{{ asset('images/faces/face34.png') }}"
-                                alt="profile image">
-                              <div>
-                                <div> Company</div>
-                                <div class="font-weight-bold  mt-1">volkswagen</div>
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            Budget
-                            <div class="font-weight-bold  mt-1">$2322 </div>
-                          </td>
-                          <td>
-                            Status
-                            <div class="font-weight-bold text-success mt-1">88% </div>
-                          </td>
-                          <td>
-                            Deadline
-                            <div class="font-weight-bold  mt-1">07 Nov 2019</div>
-                          </td>
-                          <td>
-                            <button type="button" class="btn btn-sm btn-secondary">edit actions</button>
-                          </td>
-                        </tr>
+                        @endforelse
                       </tbody>
                     </table>
                   </div>
@@ -530,4 +175,322 @@
               </div>
             </div>
           </div>
+@endsection
+
+@section('scripts')
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log("Dashboard Chart script: DOMContentLoaded fired.");
+        var chartCanvas = document.getElementById("adminLiveDashboardChart");
+        var chartContainer = chartCanvas ? chartCanvas.parentNode : null;
+        if (!chartContainer) {
+            console.error("Dashboard Chart Error: Canvas element 'adminLiveDashboardChart' not found!");
+            return;
+        }
+
+        try {
+            var ctx = chartCanvas.getContext("2d");
+            if (typeof Chart === 'undefined') {
+                throw new Error("Thư viện Chart.js chưa được tải thành công. Vui lòng kiểm tra lại asset/vendors/chart.js/Chart.min.js.");
+            }
+
+            // Dữ liệu bộ đệm trong bộ nhớ (được truyền từ PHP sang ban đầu)
+            var chartDataSixMonths = {
+                labels: {!! json_encode($stats['chart_six_months']['labels']) !!},
+                revenue: {!! json_encode($stats['chart_six_months']['revenue']) !!},
+                sold: {!! json_encode($stats['chart_six_months']['sold']) !!}
+            };
+
+            var chartDataCurrentMonth = {
+                labels: {!! json_encode($stats['chart_current_month']['labels']) !!},
+                revenue: {!! json_encode($stats['chart_current_month']['revenue']) !!},
+                sold: {!! json_encode($stats['chart_current_month']['sold']) !!}
+            };
+
+            var currentViewMode = 'six_months'; // Chế độ hiển thị mặc định
+
+            // Khởi tạo biểu đồ kết hợp (Bar + Line Chart) bằng Chart.js v2
+            window.myLiveChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: chartDataSixMonths.labels,
+                    datasets: [
+                        {
+                            label: 'Doanh thu (Triệu ₫)',
+                            type: 'line',
+                            data: chartDataSixMonths.revenue,
+                            fill: false,
+                            borderColor: '#10b981',
+                            backgroundColor: '#10b981',
+                            borderWidth: 3.5,
+                            pointBackgroundColor: '#10b981',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 1.5,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                            yAxisID: 'y-axis-2',
+                            tension: 0.25
+                        },
+                        {
+                            label: 'Số lượng bán (Cái)',
+                            type: 'bar',
+                            data: chartDataSixMonths.sold,
+                            backgroundColor: 'rgba(5, 25, 35, 0.75)',
+                            borderColor: '#051923',
+                            borderWidth: 1,
+                            yAxisID: 'y-axis-1'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        yAxes: [
+                            {
+                                id: 'y-axis-1',
+                                type: 'linear',
+                                position: 'left',
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontColor: '#4b5563',
+                                    fontSize: 11
+                                },
+                                gridLines: {
+                                    drawBorder: false,
+                                    color: 'rgba(0,0,0,0.06)'
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Số lượng sản phẩm (Cái)',
+                                    fontColor: '#4b5563',
+                                    fontWeight: 'bold'
+                                }
+                            },
+                            {
+                                id: 'y-axis-2',
+                                type: 'linear',
+                                position: 'right',
+                                ticks: {
+                                    beginAtZero: true,
+                                    fontColor: '#10b981',
+                                    fontSize: 11
+                                },
+                                gridLines: {
+                                    drawOnChartArea: false,
+                                    drawBorder: false
+                                },
+                                scaleLabel: {
+                                    display: true,
+                                    labelString: 'Doanh thu (Triệu VNĐ)',
+                                    fontColor: '#10b981',
+                                    fontWeight: 'bold'
+                                }
+                            }
+                        ],
+                        xAxes: [
+                            {
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    fontColor: '#4b5563',
+                                    fontSize: 11
+                                }
+                            }
+                        ]
+                    },
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            boxWidth: 12,
+                            fontFamily: '"Segoe UI", Tahoma, Geneva, Verdana, sans-serif',
+                            fontSize: 12,
+                            fontColor: '#374151',
+                            padding: 15
+                        }
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(17, 24, 39, 0.95)',
+                        titleFontFamily: '"Segoe UI", sans-serif',
+                        titleFontSize: 13,
+                        titleFontColor: '#ffffff',
+                        bodyFontFamily: '"Segoe UI", sans-serif',
+                        bodyFontSize: 12,
+                        bodyFontColor: '#ffffff',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        padding: 12
+                    }
+                }
+            });
+
+            // Hàm chuyển đổi chế độ xem biểu đồ
+            window.switchChartView = function(mode) {
+                currentViewMode = mode;
+                
+                const btnMonth = document.getElementById('btn-view-month');
+                const btnSixMonths = document.getElementById('btn-view-six-months');
+                const subTitle = document.getElementById('chart-sub-title');
+                
+                if (mode === 'current_month') {
+                    btnMonth.className = 'btn btn-sm btn-dark font-weight-bold px-3 py-2';
+                    btnSixMonths.className = 'btn btn-sm btn-light font-weight-bold px-3 py-2';
+                    subTitle.innerText = 'Đang hiển thị doanh số hàng ngày trong tháng hiện tại (Cập nhật Live ⚡)';
+                    
+                    window.myLiveChart.data.labels = chartDataCurrentMonth.labels;
+                    window.myLiveChart.data.datasets[0].data = chartDataCurrentMonth.revenue;
+                    window.myLiveChart.data.datasets[1].data = chartDataCurrentMonth.sold;
+                } else {
+                    btnMonth.className = 'btn btn-sm btn-light font-weight-bold px-3 py-2';
+                    btnSixMonths.className = 'btn btn-sm btn-dark font-weight-bold px-3 py-2';
+                    subTitle.innerText = 'Đang hiển thị so sánh 6 tháng gần nhất (Cập nhật Live ⚡)';
+                    
+                    window.myLiveChart.data.labels = chartDataSixMonths.labels;
+                    window.myLiveChart.data.datasets[0].data = chartDataSixMonths.revenue;
+                    window.myLiveChart.data.datasets[1].data = chartDataSixMonths.sold;
+                }
+                
+                window.myLiveChart.update();
+            };
+
+            // Đăng ký hàm cập nhật live vào đối tượng window để gọi từ các sự kiện Echo trong master layout
+            window.updateLiveDashboard = function() {
+                console.log("WebSockets: Nhận sự kiện đơn hàng. Đang gọi API cập nhật biểu đồ và số liệu...");
+                
+                // Xoay icon đồng bộ để hiển thị trạng thái loading
+                const syncIcon = document.querySelector('.badge-success i');
+                if (syncIcon) syncIcon.classList.add('fa-spin');
+
+                fetch("{{ route('admin.api.dashboard_stats') }}")
+                    .then(response => {
+                        if (!response.ok) throw new Error("API Lỗi");
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            var stats = data.stats;
+                            
+                            // 1. Cập nhật các thẻ số liệu
+                            document.getElementById('stat-total-stock').innerText = new Intl.NumberFormat('vi-VN').format(stats.total_stock);
+                            document.getElementById('stat-sold-this-month').innerText = new Intl.NumberFormat('vi-VN').format(stats.sold_this_month);
+                            document.getElementById('stat-revenue-this-month').innerText = stats.revenue_this_month_formatted;
+
+                            // 2. Cập nhật bộ đệm dữ liệu trong bộ nhớ
+                            chartDataSixMonths = stats.chart_six_months;
+                            chartDataCurrentMonth = stats.chart_current_month;
+
+                            // 3. Cập nhật biểu đồ theo chế độ xem hiện tại
+                            if (currentViewMode === 'current_month') {
+                                window.myLiveChart.data.labels = chartDataCurrentMonth.labels;
+                                window.myLiveChart.data.datasets[0].data = chartDataCurrentMonth.revenue;
+                                window.myLiveChart.data.datasets[1].data = chartDataCurrentMonth.sold;
+                            } else {
+                                window.myLiveChart.data.labels = chartDataSixMonths.labels;
+                                window.myLiveChart.data.datasets[0].data = chartDataSixMonths.revenue;
+                                window.myLiveChart.data.datasets[1].data = chartDataSixMonths.sold;
+                            }
+                            
+                            // 4. Render lại biểu đồ với hiệu ứng mượt
+                            window.myLiveChart.update();
+
+                            // 5. Cập nhật lại bảng đơn hàng gần đây
+                            updateRecentOrdersTable(stats.recent_orders);
+                            
+                            console.log("Thống kê đã được cập nhật thành công!");
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Lỗi khi cập nhật dữ liệu tự động:", err);
+                    })
+                    .finally(() => {
+                        if (syncIcon) {
+                            setTimeout(() => {
+                                syncIcon.classList.remove('fa-spin');
+                            }, 500);
+                        }
+                    });
+            };
+
+            // Hàm cập nhật danh sách đơn hàng gần đây qua DOM
+            function updateRecentOrdersTable(orders) {
+                const tbody = document.getElementById('recent-orders-tbody');
+                if (!tbody) return;
+
+                if (orders.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted font-weight-bold py-4">Chưa có đơn hàng nào</td></tr>';
+                    return;
+                }
+
+                let html = '';
+                orders.forEach(order => {
+                    let statusBadge = '';
+                    if (order.status == 1) {
+                        statusBadge = '<span class="badge font-weight-bold" style="background-color: #fef3c7; color: #d97706; border: 1px solid #fde68a;">⏳ Chờ xác nhận</span>';
+                    } else if (order.status == 5) {
+                        statusBadge = '<span class="badge font-weight-bold" style="background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;">💳 Chờ thanh toán QR</span>';
+                    } else if (order.status == 2) {
+                        statusBadge = '<span class="badge font-weight-bold" style="background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0;">📦 Đang chuẩn bị</span>';
+                    } else if (order.status == 3) {
+                        statusBadge = '<span class="badge font-weight-bold" style="background-color: #e0e7ff; color: #4338ca; border: 1px solid #c7d2fe;">🚚 Đang giao</span>';
+                    } else if (order.status == 4) {
+                        statusBadge = '<span class="badge font-weight-bold" style="background-color: #dcfce7; color: #16a34a; border: 1px solid #bbf7d0;">✅ Đã giao</span>';
+                    } else if (order.status == 0) {
+                        statusBadge = '<span class="badge font-weight-bold" style="background-color: #fee2e2; color: #b91c1c; border: 1px solid #fecaca;">❌ Đã hủy</span>';
+                    }
+
+                    // Format ngày đặt hàng
+                    const dateStr = new Date(order.created_at).toLocaleString('vi-VN', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric'
+                    }).replace(',', '');
+
+                    const totalAmountStr = new Intl.NumberFormat('vi-VN').format(order.total_amount) + ' ₫';
+
+                    html += `
+                    <tr>
+                      <td class="font-weight-bold text-primary">#${order.id}</td>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          <div class="bg-light p-2 rounded-circle mr-2 text-secondary" style="width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;">
+                            <i class="typcn typcn-user text-sm"></i>
+                          </div>
+                          <div>
+                            <div class="font-weight-bold text-dark" style="font-size: 13px;">${order.name}</div>
+                            <small class="text-muted" style="font-size: 11px;">${order.email || 'Không có email'}</small>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="font-weight-medium text-secondary" style="font-size: 13px;">${order.phone || 'N/A'}</td>
+                      <td class="text-center font-weight-bold text-dark" style="font-size: 13px;">${order.items_count} SP</td>
+                      <td class="font-weight-bold" style="color: #1e3a8a; font-size: 13px;">${totalAmountStr}</td>
+                      <td>${statusBadge}</td>
+                      <td class="text-muted" style="font-size: 12px;">${dateStr}</td>
+                      <td>
+                        <a href="{{ route('admin.orders.table') }}?search=${order.id}" class="btn btn-sm btn-light font-weight-bold text-primary border" style="border-radius: 6px;">
+                          <i class="typcn typcn-eye mr-1"></i> Chi tiết
+                        </a>
+                      </td>
+                    </tr>
+                    `;
+                });
+                tbody.innerHTML = html;
+            }
+        } catch (e) {
+            console.error("Dashboard Chart Error:", e);
+            var errDiv = document.createElement('div');
+            errDiv.className = 'alert alert-danger mt-3';
+            errDiv.style.borderRadius = '8px';
+            errDiv.innerHTML = `<strong>Lỗi hiển thị biểu đồ:</strong> ${e.message}<br><small>Vui lòng ấn Ctrl + F5 để làm sạch bộ nhớ cache trình duyệt, hoặc kiểm tra kết nối internet.</small>`;
+            chartContainer.appendChild(errDiv);
+        }
+    });
+</script>
 @endsection

@@ -53,10 +53,130 @@ class Admincontroller extends Controller
       return redirect()->route('admin.login')->with('success', 'Đăng xuất tài khoản quản trị thành công.');
   }
 
- public function admin(){
-    
-    return view('admin.layout.index');
- }
+  public function admin(){
+      $stats = $this->calculateDashboardStats();
+      return view('admin.layout.index', compact('stats'));
+  }
+
+  public function getDashboardStatsApi() {
+      $stats = $this->calculateDashboardStats();
+      return response()->json([
+          'success' => true,
+          'stats' => $stats
+      ]);
+  }
+
+  private function calculateDashboardStats() {
+      // 1. Tổng số lượng sản phẩm còn trong kho (tính tổng stock của tất cả biến thể)
+      $totalStock = DB::table('product_variants')->sum('stock') ?? 0;
+
+      // 2. Số lượng sản phẩm bán ra trong tháng hiện tại (orders.status là 2, 3, 4)
+      $soldThisMonth = DB::table('order_details')
+          ->join('orders', 'order_details.order_id', '=', 'orders.id')
+          ->whereIn('orders.status', [2, 3, 4])
+          ->whereMonth('orders.created_at', now()->month)
+          ->whereYear('orders.created_at', now()->year)
+          ->sum('order_details.quantity') ?? 0;
+
+      // 3. Doanh thu của tháng hiện tại (orders.status là 2, 3, 4)
+      $revenueThisMonth = DB::table('order_details')
+          ->join('orders', 'order_details.order_id', '=', 'orders.id')
+          ->whereIn('orders.status', [2, 3, 4])
+          ->whereMonth('orders.created_at', now()->month)
+          ->whereYear('orders.created_at', now()->year)
+          ->sum(DB::raw('order_details.price * order_details.quantity')) ?? 0;
+
+      // 4. Lấy dữ liệu 6 tháng gần nhất để so sánh
+      $chartLabels = [];
+      $chartRevenue = [];
+      $chartSold = [];
+
+      for ($i = 5; $i >= 0; $i--) {
+          $date = now()->subMonths($i);
+          $month = $date->month;
+          $year = $date->year;
+
+          $chartLabels[] = "T. $month/$year";
+
+          $monthlySold = DB::table('order_details')
+              ->join('orders', 'order_details.order_id', '=', 'orders.id')
+              ->whereIn('orders.status', [2, 3, 4])
+              ->whereMonth('orders.created_at', $month)
+              ->whereYear('orders.created_at', $year)
+              ->sum('order_details.quantity') ?? 0;
+
+          $monthlyRevenue = DB::table('order_details')
+              ->join('orders', 'order_details.order_id', '=', 'orders.id')
+              ->whereIn('orders.status', [2, 3, 4])
+              ->whereMonth('orders.created_at', $month)
+              ->whereYear('orders.created_at', $year)
+              ->sum(DB::raw('order_details.price * order_details.quantity')) ?? 0;
+
+          // Đổi doanh thu sang đơn vị Triệu VNĐ để biểu đồ hiển thị đẹp
+          $chartRevenue[] = round($monthlyRevenue / 1000000, 2);
+          $chartSold[] = (int)$monthlySold;
+      }
+
+      // 4b. Lấy dữ liệu theo ngày trong tháng hiện tại
+      $daysInMonth = now()->daysInMonth;
+      $dailyLabels = [];
+      $dailyRevenue = [];
+      $dailySold = [];
+
+      for ($day = 1; $day <= $daysInMonth; $day++) {
+          $dailyLabels[] = "N. $day";
+
+          $daySold = DB::table('order_details')
+              ->join('orders', 'order_details.order_id', '=', 'orders.id')
+              ->whereIn('orders.status', [2, 3, 4])
+              ->whereDay('orders.created_at', $day)
+              ->whereMonth('orders.created_at', now()->month)
+              ->whereYear('orders.created_at', now()->year)
+              ->sum('order_details.quantity') ?? 0;
+
+          $dayRevenue = DB::table('order_details')
+              ->join('orders', 'order_details.order_id', '=', 'orders.id')
+              ->whereIn('orders.status', [2, 3, 4])
+              ->whereDay('orders.created_at', $day)
+              ->whereMonth('orders.created_at', now()->month)
+              ->whereYear('orders.created_at', now()->year)
+              ->sum(DB::raw('order_details.price * order_details.quantity')) ?? 0;
+
+          $dailyRevenue[] = round($dayRevenue / 1000000, 2);
+          $dailySold[] = (int)$daySold;
+      }
+
+      // 5. Lấy danh sách 5 đơn hàng mới nhất
+      $recentOrders = DB::table('orders')
+          ->select('orders.*', 'customers.name as customer_db_name')
+          ->leftJoin('customers', 'orders.customer_id', '=', 'customers.id')
+          ->orderBy('orders.created_at', 'desc')
+          ->limit(5)
+          ->get();
+
+      foreach ($recentOrders as $order) {
+          $order->items_count = DB::table('order_details')->where('order_id', $order->id)->sum('quantity');
+          $order->total_amount = DB::table('order_details')->where('order_id', $order->id)->selectRaw('SUM(price * quantity) as total')->first()->total ?? 0;
+      }
+
+      return [
+          'total_stock' => (int)$totalStock,
+          'sold_this_month' => (int)$soldThisMonth,
+          'revenue_this_month' => (float)$revenueThisMonth,
+          'revenue_this_month_formatted' => number_format($revenueThisMonth, 0, ',', '.') . ' ₫',
+          'recent_orders' => $recentOrders,
+          'chart_six_months' => [
+              'labels' => $chartLabels,
+              'revenue' => $chartRevenue,
+              'sold' => $chartSold
+          ],
+          'chart_current_month' => [
+              'labels' => $dailyLabels,
+              'revenue' => $dailyRevenue,
+              'sold' => $dailySold
+          ]
+      ];
+  }
   public function products_table(Request $request){
     $query = DB::table('products')
     ->select('products.*', 'categories.name as category_name', DB::raw('COALESCE((SELECT SUM(stock) FROM product_variants WHERE product_variants.product_id = products.id), 0) as total_stock'))
@@ -131,14 +251,16 @@ class Admincontroller extends Controller
   return redirect()->route('admin.category.addCategory')->with('success', 'Danh mục đã được thêm thành công!');
 }
 public function addProductsPost(Request $request){
+
+
   $validatedData = $request->validate([
-    'name' => 'required|string|max:255',
+    'name' => 'required|string|max:255|unique:products,name',
     'price' => 'required|numeric|min:0',
     'sale_price' => 'nullable|numeric|min:0',
     'category_id' => 'required|exists:categories,id',
     'status' => 'required|in:1,0',
-    'description' => 'nullable|string',
-    'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    'description' => 'required|string',
+    'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
     'gallery' => 'nullable|array',
     'gallery.*.image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
     'gallery.*.type' => 'required|integer|in:1,2',
@@ -155,6 +277,7 @@ public function addProductsPost(Request $request){
     'name.required' => 'Vui lòng nhập tên sản phẩm.',
     'name.string' => 'Tên sản phẩm phải là chuỗi ký tự.',
     'name.max' => 'Tên sản phẩm không được vượt quá 255 ký tự.',
+    'name.unique' => 'Tên sản phẩm này đã tồn tại trong hệ thống.',
     'price.required' => 'Vui lòng nhập giá sản phẩm.',
     'price.numeric' => 'Giá sản phẩm phải là số.',
     'price.min' => 'Giá sản phẩm không được nhỏ hơn 0.',
@@ -164,7 +287,9 @@ public function addProductsPost(Request $request){
     'category_id.exists' => 'Danh mục sản phẩm không tồn tại.',
     'status.required' => 'Vui lòng chọn trạng thái sản phẩm.',
     'status.in' => 'Trạng thái sản phẩm không hợp lệ.',
+    'description.required' => 'Vui lòng nhập mô tả chi tiết sản phẩm.',
     'description.string' => 'Mô tả sản phẩm phải là chuỗi ký tự.',
+    'image.required' => 'Vui lòng chọn hình ảnh chính cho sản phẩm.',
     'image.image' => 'Tập tin tải lên phải là hình ảnh.',
     'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg hoặc gif.',
     'image.max' => 'Kích thước hình ảnh không được vượt quá 2MB.',
@@ -181,6 +306,7 @@ public function addProductsPost(Request $request){
     'variants.*.stock.integer' => 'Số lượng kho biến thể phải là số nguyên.',
     'variants.*.stock.min' => 'Số lượng kho biến thể không được nhỏ hơn 0.',
   ]);
+
   
   $imageName = null;
   if ($request->hasFile('image')) {
@@ -250,12 +376,12 @@ public function editProduct($id){
 
 public function editProductPost(Request $request, $id){
   $validatedData = $request->validate([
-    'name' => 'required|string|max:255',
+    'name' => 'required|string|max:255|unique:products,name,' . $id,
     'price' => 'required|numeric|min:0',
     'sale_price' => 'nullable|numeric|min:0',
     'category_id' => 'required|exists:categories,id',
     'status' => 'required|in:1,0',
-    'description' => 'nullable|string',
+    'description' => 'required|string',
     'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
     'gallery' => 'nullable|array',
     'gallery.*.image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -284,6 +410,7 @@ public function editProductPost(Request $request, $id){
     'name.required' => 'Vui lòng nhập tên sản phẩm.',
     'name.string' => 'Tên sản phẩm phải là chuỗi ký tự.',
     'name.max' => 'Tên sản phẩm không được vượt quá 255 ký tự.',
+    'name.unique' => 'Tên sản phẩm này đã tồn tại trong hệ thống.',
     'price.required' => 'Vui lòng nhập giá sản phẩm.',
     'price.numeric' => 'Giá sản phẩm phải là số.',
     'price.min' => 'Giá sản phẩm không được nhỏ hơn 0.',
@@ -293,6 +420,7 @@ public function editProductPost(Request $request, $id){
     'category_id.exists' => 'Danh mục sản phẩm không tồn tại.',
     'status.required' => 'Vui lòng chọn trạng thái sản phẩm.',
     'status.in' => 'Trái thái sản phẩm không hợp lệ.',
+    'description.required' => 'Vui lòng nhập mô tả chi tiết sản phẩm.',
     'description.string' => 'Mô tả sản phẩm phải là chuỗi ký tự.',
     'image.image' => 'Tập tin tải lên phải là hình ảnh.',
     'image.mimes' => 'Hình ảnh phải có định dạng jpeg, png, jpg hoặc gif.',
@@ -635,4 +763,50 @@ public function deleteDetailImage($id) {
           'created_at_formatted' => date('d/m/Y H:i', strtotime($order->created_at))
       ]);
   }
+
+  /**
+   * Hiển thị danh sách bình luận sản phẩm, hỗ trợ tìm kiếm và lọc số sao
+   */
+  public function comments_table(Request $request) {
+      $query = DB::table('comments')
+          ->select('comments.*', 'products.name as product_name', 'products.image as product_image', 'users.name as user_name', 'users.email as user_email')
+          ->join('products', 'comments.product_id', '=', 'products.id')
+          ->join('users', 'comments.user_id', '=', 'users.id');
+
+      // Tìm kiếm theo tên sản phẩm, nội dung bình luận, hoặc tên/email người dùng
+      if ($request->has('search') && !empty($request->query('search'))) {
+          $search = $request->query('search');
+          $query->where(function($q) use ($search) {
+              $q->where('products.name', 'like', '%' . $search . '%')
+                ->orWhere('comments.content', 'like', '%' . $search . '%')
+                ->orWhere('users.name', 'like', '%' . $search . '%')
+                ->orWhere('users.email', 'like', '%' . $search . '%');
+          });
+      }
+
+      // Lọc theo điểm số sao (rating)
+      if ($request->has('rating') && $request->query('rating') !== null && $request->query('rating') !== '') {
+          $query->where('comments.rating', '=', $request->query('rating'));
+      }
+
+      // Phân trang danh sách bình luận (10 dòng mỗi trang)
+      $comments = $query->orderBy('comments.created_at', 'desc')
+          ->paginate(10)
+          ->withQueryString();
+
+      return view('admin.layout.module.comments-table', compact('comments'));
+  }
+
+  /**
+   * Xóa một bình luận từ Admin dashboard
+   */
+  public function delete_comment($id) {
+      $comment = DB::table('comments')->where('id', $id)->first();
+      if ($comment) {
+          DB::table('comments')->where('id', $id)->delete();
+          return redirect()->back()->with('success', 'Bình luận đã được xóa thành công!');
+      }
+      return redirect()->back()->with('error', 'Bình luận không tồn tại!');
+  }
 }
+

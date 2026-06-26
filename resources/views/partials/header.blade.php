@@ -3,7 +3,7 @@
     <div class="container mx-auto px-4 py-3 flex items-center justify-between">
         <!-- Logo -->
         <div class="flex items-center space-x-2 w-48">
-            <h1 class="text-3xl font-black italic text-gray-800"><span class="text-blue-500">S</span><span class="text-green-500">P</span><span class="text-primary">A</span><span class="text-black">TACUS</span></h1>
+           <a href="{{route('home')}}"> <h1 class="text-3xl font-black italic text-gray-800"><span class="text-blue-500">S</span><span class="text-green-500">P</span><span class="text-primary">A</span><span class="text-black">TACUS</span></h1></a>
         </div>
 
         <!-- Search -->
@@ -106,10 +106,10 @@
     </div>
     
     <div class="container mx-auto px-4 pb-2 text-xs text-gray-500 flex space-x-4 pl-64">
-        <a href="#" class="hover:text-primary">Laptop Gaming</a>
-        <a href="#" class="hover:text-primary">Laptop Văn Phòng</a>
-        <a href="#" class="hover:text-primary">MacBook chính hãng</a>
-        <a href="#" class="hover:text-primary">Laptop Đồ Họa</a>
+        <a href="{{ url('category?type=gaming') }}" class="hover:text-primary">Laptop Gaming</a>
+        <a href="{{ url('category?type=van-phong') }}" class="hover:text-primary">Laptop Văn Phòng</a>
+        <a href="{{ url('category?type=macbook') }}" class="hover:text-primary">MacBook chính hãng</a>
+        <a href="{{ url('category?type=do-hoa') }}" class="hover:text-primary">Laptop Đồ Họa</a>
     </div>
 
     <!-- Navigation -->
@@ -120,12 +120,12 @@
                 <span>DANH MỤC SẢN PHẨM</span>
             </div>
             <div class="flex items-center space-x-8 px-6 text-xs font-bold text-gray-700 uppercase">
-                <a href="#" class="nav-item flex items-center"><i class="fas fa-gamepad mr-2 text-gray-400"></i> Laptop Gaming</a>
-                <a href="#" class="nav-item flex items-center"><i class="fas fa-laptop mr-2 text-gray-400"></i> Ultrabook Mỏng Nhẹ</a>
-                <a href="#" class="nav-item flex items-center"><i class="fas fa-palette mr-2 text-gray-400"></i> Laptop Đồ Họa</a>
-                <a href="#" class="nav-item flex items-center"><i class="fab fa-apple mr-2 text-gray-400"></i> MacBook Series</a>
-                <a href="#" class="nav-item flex items-center"><i class="fas fa-graduation-cap mr-2 text-gray-400"></i> Laptop Sinh Viên</a>
-                <a href="#" class="nav-item flex items-center"><i class="fas fa-mouse mr-2 text-gray-400"></i> Phụ kiện Laptop</a>
+                <a href="{{ url('category?type=gaming') }}" class="nav-item flex items-center"><i class="fas fa-gamepad mr-2 text-gray-400"></i> Laptop Gaming</a>
+                <a href="{{ url('category?type=van-phong') }}" class="nav-item flex items-center"><i class="fas fa-laptop mr-2 text-gray-400"></i> Ultrabook Mỏng Nhẹ</a>
+                <a href="{{ url('category?type=do-hoa') }}" class="nav-item flex items-center"><i class="fas fa-palette mr-2 text-gray-400"></i> Laptop Đồ Họa</a>
+                <a href="{{ url('category?type=macbook') }}" class="nav-item flex items-center"><i class="fab fa-apple mr-2 text-gray-400"></i> MacBook Series</a>
+                <a href="{{ url('category?type=sinh-vien') }}" class="nav-item flex items-center"><i class="fas fa-graduation-cap mr-2 text-gray-400"></i> Laptop Sinh Viên</a>
+                <a href="{{ url('category?type=phu-kien') }}" class="nav-item flex items-center"><i class="fas fa-mouse mr-2 text-gray-400"></i> Phụ kiện Laptop</a>
             </div>
         </div>
     </div>

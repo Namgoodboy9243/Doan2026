@@ -11,17 +11,53 @@
                   <p class="card-description">
                     Nhập thông tin chi tiết cho sản phẩm
                   </p>
+                  @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 12px; border: none; background-color: #fee2e2; color: #991b1b; padding: 15px 20px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                      <div class="d-flex align-items-center mb-2">
+                        <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ef4444;">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <strong style="font-size: 15px; margin-left: 8px;">Có lỗi xảy ra, vui lòng kiểm tra lại:</strong>
+                      </div>
+                      <ul class="mb-0 pl-4" style="font-size: 13px; line-height: 1.6;">
+                        @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
+
+                  @if ($errors->any())
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" style="border-radius: 12px; border: none; background-color: #fee2e2; color: #991b1b; padding: 15px 20px; margin-bottom: 25px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
+                      <div class="d-flex align-items-center mb-2">
+                        <svg class="mr-2" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color: #ef4444;">
+                          <circle cx="12" cy="12" r="10"></circle>
+                          <line x1="12" y1="8" x2="12" y2="12"></line>
+                          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                        <strong style="font-size: 15px; margin-left: 8px;">Có lỗi xảy ra, vui lòng kiểm tra lại:</strong>
+                      </div>
+                      <ul class="mb-0 pl-4" style="font-size: 13px; line-height: 1.6;">
+                        @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                        @endforeach
+                      </ul>
+                    </div>
+                  @endif
+
                   <form class="forms-sample" action="{{ route('admin.products_post.addProducts') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                      <label for="productName">Tên sản phẩm</label>
+                      <label for="productName">Tên sản phẩm <span class="text-danger">*</span></label>
                       <input type="text" class="form-control @error('name') is-invalid @enderror" id="productName" name="name" value="{{ old('name') }}" placeholder="Nhập tên sản phẩm">
                       @error('name')
                         <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label for="productPrice">Giá sản phẩm (VNĐ)</label>
+                      <label for="productPrice">Giá sản phẩm (VNĐ) <span class="text-danger">*</span></label>
                       <input type="number" class="form-control @error('price') is-invalid @enderror" id="productPrice" name="price" value="{{ old('price') }}" placeholder="Ví dụ: 100000" min="0" oninput="if(this.value < 0) this.value = Math.abs(this.value)">
                       @error('price')
                         <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
@@ -35,7 +71,7 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label for="productCategory">Danh mục</label>
+                      <label for="productCategory">Danh mục <span class="text-danger">*</span></label>
                         <select class="form-control @error('category_id') is-invalid @enderror" id="productCategory" name="category_id">
                           <option value="">-- Chọn danh mục --</option>
                           @if($categories->count() > 0)
@@ -61,7 +97,7 @@
                       @enderror
                     </div>
                     <div class="form-group">
-                      <label for="img">Hình ảnh sản phẩm</label>
+                      <label for="img">Hình ảnh sản phẩm <span class="text-danger">*</span></label>
                       <input type="file" name="image" id="img" class="file-upload-default @error('image') is-invalid @enderror" style="display: none;" onchange="previewImage(event)" accept="image/*">
                       <div class="input-group col-xs-12">
                         <input type="text" id="file-upload-info" class="form-control file-upload-info" disabled placeholder="Chọn hình ảnh tải lên">
@@ -171,7 +207,7 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="productDescription">Mô tả sản phẩm</label>
+                      <label for="productDescription">Mô tả sản phẩm <span class="text-danger">*</span></label>
                       <textarea class="form-control @error('description') is-invalid @enderror" id="productDescription" name="description" rows="4" placeholder="Nhập mô tả sản phẩm">{{ old('description') }}</textarea>
                       @error('description')
                         <div class="invalid-feedback" style="display: block;">{{ $message }}</div>
@@ -378,22 +414,24 @@
 
     var galleryIndex = 0;
 
-    document.getElementById('btn-add-gallery-item').addEventListener('click', function() {
-        var container = document.getElementById('gallery-container');
-        var itemHtml = `
-            <div class="col-md-6 col-lg-4 mb-3 gallery-item" id="gallery-item-${galleryIndex}">
-              <div class="card h-100 shadow-sm border" style="border-radius: 12px; overflow: hidden; background: #fcfcfc;">
+    function addGalleryItemHtml(index, type = '1', sortOrder = '', hasError = false) {
+        var borderStyle = hasError ? 'border-color: #f87171 !important;' : '';
+        var boxBorderStyle = hasError ? 'border: 2px dashed #f87171; background: #fff5f5;' : 'border: 2px dashed #cbd5e1; background: #f8fafc;';
+        var placeholderContent = hasError 
+            ? `<div id="gallery-placeholder-${index}" class="text-danger d-flex flex-column align-items-center"><i class="typcn typcn-image" style="font-size: 32px; color: #ef4444;"></i><span style="font-size: 12px; font-weight: 600;">Chọn lại hình ảnh *</span></div>`
+            : `<div id="gallery-placeholder-${index}" class="text-muted d-flex flex-column align-items-center"><i class="typcn typcn-image" style="font-size: 32px; color: #94a3b8;"></i><span style="font-size: 12px; color: #64748b;">Chọn hình ảnh</span></div>`;
+
+        return `
+            <div class="col-md-6 col-lg-4 mb-3 gallery-item" id="gallery-item-${index}">
+              <div class="card h-100 shadow-sm border" style="border-radius: 12px; overflow: hidden; background: #fcfcfc; ${borderStyle}">
                 <div class="card-body p-3 d-flex flex-column justify-content-between">
                   
                   <!-- Upload area and preview -->
                   <div class="text-center mb-3">
-                    <input type="file" name="gallery[${galleryIndex}][image]" id="gallery-file-${galleryIndex}" class="gallery-file-input" style="display: none;" onchange="previewGalleryItemImage(this, ${galleryIndex})" accept="image/*">
-                    <div class="gallery-image-upload-box mx-auto" onclick="document.getElementById('gallery-file-${galleryIndex}').click()" style="width: 100%; height: 150px; border: 2px dashed #cbd5e1; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; background: #f8fafc; transition: all 0.2s;">
-                      <img id="gallery-preview-${galleryIndex}" src="#" alt="Xem trước" style="display: none; width: 100%; height: 100%; object-fit: cover;">
-                      <div id="gallery-placeholder-${galleryIndex}" class="text-muted d-flex flex-column align-items: center">
-                        <i class="typcn typcn-image" style="font-size: 32px; color: #94a3b8;"></i>
-                        <span style="font-size: 12px; color: #64748b;">Chọn hình ảnh</span>
-                      </div>
+                    <input type="file" name="gallery[${index}][image]" id="gallery-file-${index}" class="gallery-file-input" style="display: none;" onchange="previewGalleryItemImage(this, ${index})" accept="image/*">
+                    <div class="gallery-image-upload-box mx-auto" onclick="document.getElementById('gallery-file-${index}').click()" style="width: 100%; height: 150px; border-radius: 8px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; overflow: hidden; transition: all 0.2s; ${boxBorderStyle}">
+                      <img id="gallery-preview-${index}" src="#" alt="Xem trước" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+                      ${placeholderContent}
                     </div>
                   </div>
                   
@@ -401,21 +439,21 @@
                   <div>
                     <div class="form-group mb-2">
                       <label style="font-size: 12px; font-weight: 600; color: #475569;">Loại ảnh</label>
-                      <select name="gallery[${galleryIndex}][type]" class="form-control form-control-sm" style="border-radius: 6px; height: 34px;">
-                        <option value="1">Ảnh chi tiết</option>
-                        <option value="2">Ảnh banner/quảng cáo</option>
+                      <select name="gallery[${index}][type]" class="form-control form-control-sm" style="border-radius: 6px; height: 34px;">
+                        <option value="1" ${type == '1' ? 'selected' : ''}>Ảnh chi tiết</option>
+                        <option value="2" ${type == '2' ? 'selected' : ''}>Ảnh banner/quảng cáo</option>
                       </select>
                     </div>
                     
                     <div class="form-group mb-3">
                       <label style="font-size: 12px; font-weight: 600; color: #475569;">Thứ tự sắp xếp</label>
-                      <input type="number" name="gallery[${galleryIndex}][sort_order]" class="form-control form-control-sm" value="${galleryIndex}" min="0" style="border-radius: 6px; height: 34px;">
+                      <input type="number" name="gallery[${index}][sort_order]" class="form-control form-control-sm" value="${sortOrder !== '' ? sortOrder : index}" min="0" style="border-radius: 6px; height: 34px;">
                     </div>
                   </div>
 
                   <!-- Delete Button -->
                   <div class="text-right">
-                    <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="removeGalleryItem(${galleryIndex})" style="border-radius: 6px;">
+                    <button type="button" class="btn btn-outline-danger btn-sm w-100" onclick="removeGalleryItem(${index})" style="border-radius: 6px;">
                       Xóa ảnh này
                     </button>
                   </div>
@@ -424,7 +462,11 @@
               </div>
             </div>
         `;
-        container.insertAdjacentHTML('beforeend', itemHtml);
+    }
+
+    document.getElementById('btn-add-gallery-item').addEventListener('click', function() {
+        var container = document.getElementById('gallery-container');
+        container.insertAdjacentHTML('beforeend', addGalleryItemHtml(galleryIndex));
         galleryIndex++;
     });
 
@@ -437,7 +479,9 @@
             reader.onload = function(e) {
                 preview.src = e.target.result;
                 preview.style.display = 'block';
-                placeholder.style.display = 'none';
+                if (placeholder) {
+                    placeholder.style.display = 'none';
+                }
             }
             reader.readAsDataURL(input.files[0]);
         }
@@ -452,39 +496,42 @@
 
     var variantIndex = 0;
 
-    document.getElementById('btn-add-variant').addEventListener('click', function() {
-        var container = document.getElementById('variants-container');
-        var rowHtml = `
-            <tr id="variant-row-${variantIndex}">
+    function addVariantRowHtml(index, cpu = '', ram = '', storage = '', color = '', sku = '', price = '', stock = '0') {
+        return `
+            <tr id="variant-row-${index}">
               <td>
-                <input type="text" name="variants[${variantIndex}][cpu]" class="form-control form-control-sm" placeholder="e.g. i5, i7" style="border-radius: 4px;">
+                <input type="text" name="variants[${index}][cpu]" class="form-control form-control-sm" value="${cpu}" placeholder="e.g. i5, i7" style="border-radius: 4px;">
               </td>
               <td>
-                <input type="text" name="variants[${variantIndex}][ram]" class="form-control form-control-sm" placeholder="e.g. 8GB, 16GB" style="border-radius: 4px;">
+                <input type="text" name="variants[${index}][ram]" class="form-control form-control-sm" value="${ram}" placeholder="e.g. 8GB, 16GB" style="border-radius: 4px;">
               </td>
               <td>
-                <input type="text" name="variants[${variantIndex}][storage]" class="form-control form-control-sm" placeholder="e.g. 256GB SSD" style="border-radius: 4px;">
+                <input type="text" name="variants[${index}][storage]" class="form-control form-control-sm" value="${storage}" placeholder="e.g. 256GB SSD" style="border-radius: 4px;">
               </td>
               <td>
-                <input type="text" name="variants[${variantIndex}][color]" class="form-control form-control-sm" placeholder="e.g. Xám, Bạc" style="border-radius: 4px;">
+                <input type="text" name="variants[${index}][color]" class="form-control form-control-sm" value="${color}" placeholder="e.g. Xám, Bạc" style="border-radius: 4px;">
               </td>
               <td>
-                <input type="text" name="variants[${variantIndex}][sku]" class="form-control form-control-sm" placeholder="e.g. SKU-DELL" style="border-radius: 4px;">
+                <input type="text" name="variants[${index}][sku]" class="form-control form-control-sm" value="${sku}" placeholder="e.g. SKU-DELL" style="border-radius: 4px;">
               </td>
               <td>
-                <input type="number" name="variants[${variantIndex}][price]" class="form-control form-control-sm" min="0" placeholder="Nhập giá" required style="border-radius: 4px;">
+                <input type="number" name="variants[${index}][price]" class="form-control form-control-sm" value="${price}" min="0" placeholder="Nhập giá" required style="border-radius: 4px;">
               </td>
               <td>
-                <input type="number" name="variants[${variantIndex}][stock]" class="form-control form-control-sm" min="0" value="0" required style="border-radius: 4px;">
+                <input type="number" name="variants[${index}][stock]" class="form-control form-control-sm" value="${stock}" min="0" required style="border-radius: 4px;">
               </td>
               <td class="text-center">
-                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeVariantRow(${variantIndex})" style="padding: 4px 8px; border-radius: 4px;">
+                <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeVariantRow(${index})" style="padding: 4px 8px; border-radius: 4px;">
                   &times;
                 </button>
               </td>
             </tr>
         `;
-        container.insertAdjacentHTML('beforeend', rowHtml);
+    }
+
+    document.getElementById('btn-add-variant').addEventListener('click', function() {
+        var container = document.getElementById('variants-container');
+        container.insertAdjacentHTML('beforeend', addVariantRowHtml(variantIndex));
         variantIndex++;
     });
 
@@ -576,39 +623,55 @@
 
             var sku = (nameSlug ? nameSlug + '-' : '') + attrParts.join('-');
 
-            var rowHtml = `
-                <tr id="variant-row-${variantIndex}">
-                  <td>
-                    <input type="text" name="variants[${variantIndex}][cpu]" class="form-control form-control-sm" value="${cpu}" placeholder="e.g. i5, i7" style="border-radius: 4px;">
-                  </td>
-                  <td>
-                    <input type="text" name="variants[${variantIndex}][ram]" class="form-control form-control-sm" value="${ram}" placeholder="e.g. 8GB, 16GB" style="border-radius: 4px;">
-                  </td>
-                  <td>
-                    <input type="text" name="variants[${variantIndex}][storage]" class="form-control form-control-sm" value="${storage}" placeholder="e.g. 256GB SSD" style="border-radius: 4px;">
-                  </td>
-                  <td>
-                    <input type="text" name="variants[${variantIndex}][color]" class="form-control form-control-sm" value="${color}" placeholder="e.g. Xám, Bạc" style="border-radius: 4px;">
-                  </td>
-                  <td>
-                    <input type="text" name="variants[${variantIndex}][sku]" class="form-control form-control-sm" value="${sku}" placeholder="e.g. SKU-DELL" style="border-radius: 4px;">
-                  </td>
-                  <td>
-                    <input type="number" name="variants[${variantIndex}][price]" class="form-control form-control-sm" min="0" placeholder="Nhập giá" required style="border-radius: 4px;">
-                  </td>
-                  <td>
-                    <input type="number" name="variants[${variantIndex}][stock]" class="form-control form-control-sm" min="0" value="0" required style="border-radius: 4px;">
-                  </td>
-                  <td class="text-center">
-                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="removeVariantRow(${variantIndex})" style="padding: 4px 8px; border-radius: 4px;">
-                      &times;
-                    </button>
-                  </td>
-                </tr>
-            `;
-            container.insertAdjacentHTML('beforeend', rowHtml);
+            container.insertAdjacentHTML('beforeend', addVariantRowHtml(
+                variantIndex, cpu, ram, storage, color, sku, '', '0'
+            ));
             variantIndex++;
         });
+    });
+
+    // Restore old inputs on validation fail
+    document.addEventListener('DOMContentLoaded', function() {
+        // Restore gallery
+        var oldGallery = @json(old('gallery', []));
+        if (oldGallery && Object.keys(oldGallery).length > 0) {
+            var galleryContainer = document.getElementById('gallery-container');
+            Object.keys(oldGallery).forEach(function(key) {
+                var item = oldGallery[key];
+                // Show as error border since file upload is lost on redirect back
+                galleryContainer.insertAdjacentHTML('beforeend', addGalleryItemHtml(
+                    galleryIndex, item.type, item.sort_order, true
+                ));
+                galleryIndex++;
+            });
+        }
+
+        // Restore variants
+        var oldVariants = @json(old('variants', []));
+        if (oldVariants && Object.keys(oldVariants).length > 0) {
+            var variantsContainer = document.getElementById('variants-container');
+            Object.keys(oldVariants).forEach(function(key) {
+                var item = oldVariants[key];
+                variantsContainer.insertAdjacentHTML('beforeend', addVariantRowHtml(
+                    variantIndex, 
+                    item.cpu || '', 
+                    item.ram || '', 
+                    item.storage || '', 
+                    item.color || '', 
+                    item.sku || '', 
+                    item.price || '', 
+                    item.stock || '0'
+                ));
+                variantIndex++;
+            });
+        }
+
+        // Trigger error toast if any
+        @if ($errors->any())
+            if (typeof showAdminToast === 'function') {
+                showAdminToast('Lỗi nhập liệu', 'Vui lòng kiểm tra lại các thông tin màu đỏ trên form!', 'error');
+            }
+        @endif
     });
 </script>
 @endsection
